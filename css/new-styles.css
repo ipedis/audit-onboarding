@@ -11,9 +11,14 @@
 
 .navbar-brand {
   width: 140px;
+  display: block;
 }
 .navbar-brand img {
   width: 100%;
+}
+
+#banner {
+  background-color: #212529;
 }
 
 .image-player {
@@ -68,6 +73,39 @@
 #how-to-play iframe {
   width: 100%;
   height: 400px;
+}
+
+/* Player info styles */
+#player-info .card img {
+  max-height: 320px;
+  object-fit: cover;
+}
+#player-info .card-body h3 {
+  font-weight: 600;
+}
+#player-info .bg-light p {
+  margin-bottom: 0.75rem;
+  color: #333;
+}
+#player-info .badge {
+  font-size: 0.95rem;
+  padding: 0.5rem 0.65rem;
+}
+
+#media video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  margin: 0 auto;
+}
+.flexbox .flex {
+  flex: 1;
 }
 
 /*# sourceMappingURL=new-styles.css.map */
