@@ -7,13 +7,42 @@
       const html = await resp.text();
       const container = document.querySelector(selector);
       if (container) container.innerHTML = html;
+      return true;
     }catch(e){
       console.error(e);
+      return false;
     }
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    includePartial('header', '#site-header');
-    includePartial('footer', '#site-footer');
+  function setActiveNavLink(){
+    const getLastSegment = (url) => {
+      try {
+        const u = new URL(url, location.href);
+        const path = u.pathname;
+        const last = path.split('/').pop();
+        return last || 'index.html';
+      } catch(e){
+        const parts = url.split('/');
+        return parts.pop() || 'index.html';
+      }
+    };
+
+    const current = (location.pathname.split('/').pop()) || 'index.html';
+    const links = document.querySelectorAll('.navbar .nav-link, .dropdown-item');
+    links.forEach(a => {
+      const href = a.getAttribute('href') || '';
+      const last = getLastSegment(href);
+      if (last === current) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', async function(){
+    await includePartial('header', '#site-header');
+    await includePartial('footer', '#site-footer');
+    setActiveNavLink();
   });
 })();
