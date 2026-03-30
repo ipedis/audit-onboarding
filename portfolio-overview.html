@@ -1,63 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Modern Business - Start Bootstrap Template</title>
+        <title>Nos événements — City Stars BC</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/new-styles.css">
     </head>
     <body class="d-flex flex-column">
         <div id="site-header"></div>
-        <main class="flex-shrink-0">
-            <!-- Page Content-->
-            <section class="py-5">
+        <!-- ERREUR 9.2 : toute la structure sémantique (<main>, <section>, <h1>, <h2>) est remplacée par des <div>.
+             Le rendu visuel est identique grâce aux classes Bootstrap. -->
+        <div class="flex-shrink-0">
+            <div class="py-5">
                 <div class="container px-5 my-5">
                     <div class="text-center mb-5">
-                        <h1 class="fw-bolder">Our Work</h1>
-                        <p class="lead fw-normal text-muted mb-0">Company portfolio</p>
+                        <div class="fw-bolder" style="font-size: calc(1.375rem + 1.5vw); line-height: 1.2; margin-bottom: 0.5rem;">Nos événements</div>
+                        <p class="lead fw-normal text-muted mb-0">Tournois, matchs amicaux et moments de vie du club</p>
                     </div>
                     <div class="row gx-5">
                         <div class="col-lg-6">
                             <div class="position-relative mb-5">
-                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="Photo du tournoi régional amateur 2023" />
+                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Tournoi régional amateur 2023</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mb-5">
-                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="Photo de la finale féminine 2023" />
+                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Finale féminine 2023</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative mb-5 mb-lg-0">
-                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="Photo du tournoi U14 départemental" />
+                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Tournoi U14 départemental</a>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="position-relative">
-                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." />
-                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
+                                <img class="img-fluid rounded-3 mb-3" src="https://dummyimage.com/600x400/343a40/6c757d" alt="Photo de la journée portes ouvertes du club" />
+                                <a class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Journée portes ouvertes</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="py-5 bg-light">
+            </div>
+            <div class="py-5 bg-light">
                 <div class="container px-5 my-5">
-                    <h2 class="display-4 fw-bolder mb-4">Let's build something together</h2>
-                    <a class="btn btn-lg btn-primary" href="#!">Contact us</a>
+                    <div class="display-4 fw-bolder mb-4">Participez à nos prochains événements</div>
+                    <a class="btn btn-lg btn-primary" href="#!">Nous contacter</a>
                 </div>
-            </section>
-        </main>
+            </div>
+        </div>
         <div id="site-footer"></div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
