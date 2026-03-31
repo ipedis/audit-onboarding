@@ -108,14 +108,12 @@
   flex: 1;
 }
 
-/* ─── ERREUR 10.2 : information transmise uniquement via CSS ::before ─── */
 .champ-obligatoire::before {
   content: "Champ obligatoire – ";
   font-weight: bold;
   color: #c00;
 }
 
-/* ─── ERREUR 10.3 : ordre visuel CSS ≠ ordre de lecture DOM ─── */
 .steps-reordered {
   display: flex;
   gap: 1.5rem;
@@ -125,7 +123,6 @@
 .steps-reordered .step-2 { order: 2; flex: 1; min-width: 200px; }
 .steps-reordered .step-3 { order: 3; flex: 1; min-width: 200px; }
 
-/* ─── ERREUR 10.4 : badge absolu en superposition à 200% de zoom ─── */
 .card-pricing-wrapper {
   position: relative;
 }
@@ -143,7 +140,6 @@
   font-weight: bold;
 }
 
-/* ─── ERREUR 10.5 : color définie sans background-color sur image de fond ─── */
 .hero-tarifs {
   background-image: url('../assets/main.jpg');
   background-size: cover;
@@ -152,7 +148,6 @@
   margin-bottom: 2rem;
 }
 .hero-tarifs .hero-text {
-  /* ERREUR 10.5 : color sans background-color – texte illisible si image absente */
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
@@ -162,7 +157,6 @@
   font-size: 1rem;
 }
 
-/* ─── ERREUR 10.6 : liens dans le texte non distinguables sans couleur ─── */
 .article-body a {
   text-decoration: none;
   color: #1a5276;
@@ -172,7 +166,6 @@
   color: #0d6efd;
 }
 
-/* ─── ERREUR 10.7 : suppression du focus visible sur éléments interactifs ─── */
 button:focus,
 input:focus,
 textarea:focus,
@@ -182,7 +175,6 @@ select:focus,
   box-shadow: none !important;
 }
 
-/* ─── ERREUR 10.11 : élément à largeur fixe forçant un défilement horizontal à 320 px ─── */
 .annonce-strip {
   min-width: 820px;
   background: #0d6efd;
@@ -193,16 +185,12 @@ select:focus,
   letter-spacing: 0.02em;
 }
 
-/* ─── ERREUR 10.12 : conteneur à hauteur fixe tronquant le texte si espacement augmenté ─── */
 .stat-compact {
   height: 52px;
   overflow: hidden;
   line-height: 1.1;
 }
 
-/* ─── ERREUR 10.13 + 10.14 : tooltip CSS survol uniquement ─── */
-/* 10.13 : pointer-events:none empêche de survoler le tooltip (disparaît si curseur se déplace dessus) */
-/* 10.14 : uniquement :hover, pas d'équivalent :focus → inaccessible au clavier */
 .has-tooltip {
   position: relative;
   cursor: pointer;

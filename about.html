@@ -24,7 +24,6 @@
                         <div class="col-lg-6">
                             <h2 class="fw-bolder">La création du club</h2>
                             <p class="lead fw-normal text-muted mb-0">City Stars BC a été fondé en 2010 par un groupe de passionnés souhaitant créer un espace ouvert à tous les niveaux de jeu. Depuis ses débuts dans un gymnase municipal, le club a grandi pour accueillir plus de 120 membres actifs, des débutants aux joueurs confirmés.</p>
-                            <!-- ERREUR 9.1 : saut de hiérarchie h2 → h4 (h3 absent) -->
                             <h4 class="fw-bold mt-4">Nos premiers pas</h4>
                             <p class="text-muted">En 2010, avec seulement douze adhérents, le club disputait ses premiers matchs amicaux dans la bonne humeur et la convivialité, posant les fondations d'un projet collectif durable.</p>
                         </div>
@@ -39,18 +38,15 @@
                         <div class="col-lg-6">
                             <h2 class="fw-bolder">Croissance et ambitions</h2>
                             <p class="lead fw-normal text-muted mb-0">Au fil des années, City Stars BC a développé des équipes mixtes, des créneaux jeunes et des partenariats avec les écoles locales. Notre objectif reste inchangé : rendre le basket accessible à tous, dans une ambiance conviviale et respectueuse.</p>
-                            <!-- ERREUR 9.4 : citation non balisée avec <blockquote> ou <q> -->
                             <p class="fst-italic text-muted mt-3">"Depuis que j'ai rejoint City Stars, j'ai progressé techniquement mais surtout j'ai trouvé une vraie famille." — Karim Benali, Trésorier</p>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- ─── ERREUR 10.3 : ordre visuel CSS ≠ ordre de lecture DOM ─── -->
             <section class="py-5">
                 <div class="container px-5 my-5">
                     <h2 class="fw-bolder mb-4">Comment rejoindre le club</h2>
                     <p class="text-muted mb-4">Suivez ces trois étapes simples pour devenir membre de City Stars BC :</p>
-                    <!-- Ordre DOM : étape 1, 2, 3 — Ordre visuel CSS (flex order) : 3, 1, 2 -->
                     <div class="steps-reordered">
                         <div class="step-3 bg-white border rounded p-4 shadow-sm">
                             <h3 class="h5 fw-bold">Étape 3 — Participer à la séance d'essai</h3>
@@ -71,7 +67,6 @@
             <section class="py-5 bg-light">
                 <div class="container px-5 my-5">
                     <div class="text-center">
-                        <!-- ERREUR 9.1 : heading vide -->
                         <h3></h3>
                         <h2 class="fw-bolder">Notre équipe dirigeante</h2>
                         <p class="lead fw-normal text-muted mb-5">Engagée pour la qualité et votre réussite sportive</p>
