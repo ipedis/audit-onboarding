@@ -82,10 +82,25 @@
                                                 <a href="#!">presse@citystars.fr</a>
                                             </p>
                                             <div class="h6 fw-bolder">Suivez-nous</div>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-twitter"></i></a>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-facebook"></i></a>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-linkedin"></i></a>
-                                            <a class="fs-5 px-2 link-dark" href="#!"><i class="bi-youtube"></i></a>
+                                            <!-- ─── ERREURS 10.13 + 10.14 : tooltip CSS survol uniquement ─── -->
+                                            <!-- 10.13 : pointer-events:none → impossible de survoler le tooltip -->
+                                            <!-- 10.14 : uniquement :hover, pas d'équivalent :focus clavier -->
+                                            <span class="has-tooltip fs-5 px-2">
+                                                <a class="link-dark" href="#!"><i class="bi-twitter"></i></a>
+                                                <span class="tooltip-content">Twitter / X</span>
+                                            </span>
+                                            <span class="has-tooltip fs-5 px-2">
+                                                <a class="link-dark" href="#!"><i class="bi-facebook"></i></a>
+                                                <span class="tooltip-content">Facebook</span>
+                                            </span>
+                                            <span class="has-tooltip fs-5 px-2">
+                                                <a class="link-dark" href="#!"><i class="bi-linkedin"></i></a>
+                                                <span class="tooltip-content">LinkedIn</span>
+                                            </span>
+                                            <span class="has-tooltip fs-5 px-2">
+                                                <a class="link-dark" href="#!"><i class="bi-youtube"></i></a>
+                                                <span class="tooltip-content">YouTube</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -175,6 +190,9 @@
         <div id="site-footer"></div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script s
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- Chart.js for last game stats -->
+    <script src="js/include-partials.js"></script>
+</body>
+</html>

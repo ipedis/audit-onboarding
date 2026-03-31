@@ -23,48 +23,82 @@
                     <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">Contactez-nous</h1>
+                            <!-- ─── ERREUR 10.1 : balise <center> de présentation obsolète ─── -->
+                            <center><h1 class="fw-bolder">Contactez-nous</h1></center>
                             <p class="lead fw-normal text-muted mb-0">Nous serons ravis de vous répondre</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
                             <div class="col-lg-8 col-xl-6">
-                                <form id="contactForm">
-                                    <!-- Champ Nom -->
+                                <form id="contactForm" novalidate>
+                                    <!-- 11.10 : indication visuelle des champs obligatoires sans aria-required ni required -->
+                                    <p class="text-muted small mb-3">Les champs marqués d'un <span class="text-danger fw-bold">*</span> sont obligatoires.</p>
+
+                                    <!-- ─── ERREUR 11.13 : autocomplete absent (devrait être "name") ─── -->
+                                    <!-- ─── ERREUR 11.10 : * visuel sans aria-required ni required ─── -->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="name" type="text" placeholder="Entrez votre nom..." />
-                                        <label for="name">Nom complet</label>
-                                        <div class="invalid-feedback">Un nom est requis.</div>
+                                        <label for="name">Nom complet <span class="text-danger" aria-hidden="true">*</span></label>
+                                        <!-- ─── ERREUR 11.10 : message d'erreur non relié par aria-describedby, pas d'aria-invalid ─── -->
+                                        <div id="err-name" class="text-danger small mt-1" style="display:none">Veuillez renseigner votre nom complet.</div>
                                     </div>
-                                    <!-- Champ Email -->
+
+                                    <!-- ─── ERREUR 11.13 : autocomplete="username" (valeur incorrecte pour un champ e-mail) ─── -->
+                                    <!-- ─── ERREUR 11.10 : * visuel sans aria-required ─── -->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="email" type="email" placeholder="nom@exemple.com" />
-                                        <label for="email">Adresse e-mail</label>
-                                        <div class="invalid-feedback">Un e-mail est requis.</div>
-                                        <div class="invalid-feedback">L'e-mail n'est pas valide.</div>
+                                        <input class="form-control" id="email" type="email" placeholder="nom@exemple.com" autocomplete="username" />
+                                        <label for="email">Adresse e-mail <span class="text-danger" aria-hidden="true">*</span></label>
+                                        <div id="err-email" class="text-danger small mt-1" style="display:none">Veuillez renseigner votre adresse e-mail.</div>
                                     </div>
-                                    <!-- Champ Téléphone -->
+
+                                    <!-- ─── ERREUR 11.1a : champ sans label — placeholder uniquement ─── -->
+                                    <div class="mb-3">
+                                        <input class="form-control" id="ville" type="text" placeholder="Votre ville de résidence" />
+                                    </div>
+
+                                    <!-- ─── ERREUR 11.1b : intitulé dans un <p>, non associé via for/id ─── -->
+                                    <div class="mb-3">
+                                        <p class="mb-1 fw-semibold">Sujet de votre message</p>
+                                        <input class="form-control" id="sujet" type="text" placeholder="Ex : Demande d'information sur les tarifs" />
+                                    </div>
+
+                                    <!-- ─── ERREUR 11.2 : label présent et lié, mais non pertinent ─── -->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="phone" type="tel" placeholder="06 00 00 00 00" />
-                                        <label for="phone">Numéro de téléphone</label>
-                                        <div class="invalid-feedback">Un numéro de téléphone est requis.</div>
+                                        <input class="form-control" id="champ-libre" type="text" placeholder="..." />
+                                        <label for="champ-libre">Champ texte *</label>
                                     </div>
-                                    <!-- Champ Message -->
+
+                                    <!-- ─── ERREUR 10.2 : ::before CSS ─── -->
+                                    <!-- ─── ERREUR 11.11 : format imposé (0X XX XX XX XX) sans aucune aide à la saisie ─── -->
+                                    <!-- ─── ERREUR 11.13 : autocomplete="postal-code" (valeur incorrecte pour un téléphone) ─── -->
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="message" type="text" placeholder="Votre message ici..." style="height: 10rem"></textarea>
-                                        <label for="message">Message</label>
-                                        <div class="invalid-feedback">Un message est requis.</div>
+                                        <input class="form-control" id="phone" type="tel" placeholder=" " autocomplete="postal-code" />
+                                        <label for="phone" class="champ-obligatoire">Numéro de téléphone</label>
+                                        <div id="err-phone" class="text-danger small mt-1" style="display:none">Format incorrect. Veuillez réessayer.</div>
                                     </div>
+
+                                    <!-- ─── ERREUR 11.10 : * visuel sans aria-required ─── -->
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="message" placeholder="Votre message ici..." style="height: 10rem"></textarea>
+                                        <label for="message">Message <span class="text-danger" aria-hidden="true">*</span></label>
+                                        <div id="err-message" class="text-danger small mt-1" style="display:none">Veuillez saisir votre message.</div>
+                                    </div>
+
+                                    <!-- ─── ERREUR 11.4 : label éloigné du champ par du contenu intermédiaire ─── -->
+                                    <div class="mb-4 border rounded p-3 bg-white">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" />
+                                        <p class="text-muted small mt-3 mb-1">En cochant cette case, vous acceptez que City Stars BC vous contacte par e-mail pour vous tenir informé des actualités, entraînements et événements du club. Vous pouvez vous désinscrire à tout moment.</p>
+                                        <label for="newsletter" class="mt-2 d-block">J'accepte de recevoir des informations sur les activités du club</label>
+                                    </div>
+
                                     <!-- Message de succès -->
-                                    <div class="d-none" id="submitSuccessMessage">
-                                        <div class="text-center mb-3">
-                                            <div class="fw-bolder">Votre message a bien été envoyé !</div>
-                                            Nous vous répondrons dans les meilleurs délais.
-                                        </div>
+                                    <div class="d-none alert alert-success" id="submitSuccessMessage">
+                                        Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.
                                     </div>
-                                    <!-- Message d'erreur -->
-                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Erreur lors de l'envoi du message !</div></div>
-                                    <!-- Bouton d'envoi -->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Envoyer</button></div>
+
+                                    <!-- ─── ERREUR 11.9 : bouton de soumission non pertinent ─── -->
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">&gt;&gt;</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -100,6 +134,44 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script src="js/include-partials.js"></script>
-    </body>
-</html>
+        <!-- ─── ERREUR 11.10 : validation sans aria-invalid ni aria-describedby ─── -->
+        <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let hasError = false;
+
+            const name = document.getElementById('name');
+            const errName = document.getElementById('err-name');
+            if (!name.value.trim()) {
+                errName.style.display = 'block';
+                hasError = true;
+            } else { errName.style.display = 'none'; }
+
+            const email = document.getElementById('email');
+            const errEmail = document.getElementById('err-email');
+            if (!email.value.trim() || !email.value.includes('@')) {
+                errEmail.style.display = 'block';
+                hasError = true;
+            } else { errEmail.style.display = 'none'; }
+
+            const phone = document.getElementById('phone');
+            const errPhone = document.getElementById('err-phone');
+            const phoneRegex = /^0[1-9][\s.\-]?\d{2}[\s.\-]?\d{2}[\s.\-]?\d{2}[\s.\-]?\d{2}$/;
+            if (phone.value.trim() && !phoneRegex.test(phone.value.trim())) {
+                errPhone.style.display = 'block';
+                hasError = true;
+            } else { errPhone.style.display = 'none'; }
+
+            const message = document.getElementById('message');
+            const errMessage = document.getElementById('err-message');
+            if (!message.value.trim()) {
+                errMessage.style.display = 'block';
+                hasError = true;
+            } else { errMessage.style.display = 'none'; }
+
+            if (!hasError) {
+                document.getElementById('submitSuccessMessage').classList.remove('d-none');
+            }
+        });
+        </script>
+    <!-- Chart.js

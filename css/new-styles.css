@@ -108,4 +108,129 @@
   flex: 1;
 }
 
+/* ─── ERREUR 10.2 : information transmise uniquement via CSS ::before ─── */
+.champ-obligatoire::before {
+  content: "Champ obligatoire – ";
+  font-weight: bold;
+  color: #c00;
+}
+
+/* ─── ERREUR 10.3 : ordre visuel CSS ≠ ordre de lecture DOM ─── */
+.steps-reordered {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.steps-reordered .step-1 { order: 1; flex: 1; min-width: 200px; }
+.steps-reordered .step-2 { order: 2; flex: 1; min-width: 200px; }
+.steps-reordered .step-3 { order: 3; flex: 1; min-width: 200px; }
+
+/* ─── ERREUR 10.4 : badge absolu en superposition à 200% de zoom ─── */
+.card-pricing-wrapper {
+  position: relative;
+}
+.promo-label {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  background: #e63946;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  z-index: 2;
+  font-weight: bold;
+}
+
+/* ─── ERREUR 10.5 : color définie sans background-color sur image de fond ─── */
+.hero-tarifs {
+  background-image: url('../assets/main.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+.hero-tarifs .hero-text {
+  /* ERREUR 10.5 : color sans background-color – texte illisible si image absente */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.hero-tarifs .hero-subtext {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+}
+
+/* ─── ERREUR 10.6 : liens dans le texte non distinguables sans couleur ─── */
+.article-body a {
+  text-decoration: none;
+  color: #1a5276;
+}
+.article-body a:hover {
+  text-decoration: none;
+  color: #0d6efd;
+}
+
+/* ─── ERREUR 10.7 : suppression du focus visible sur éléments interactifs ─── */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ─── ERREUR 10.11 : élément à largeur fixe forçant un défilement horizontal à 320 px ─── */
+.annonce-strip {
+  min-width: 820px;
+  background: #0d6efd;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* ─── ERREUR 10.12 : conteneur à hauteur fixe tronquant le texte si espacement augmenté ─── */
+.stat-compact {
+  height: 52px;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+/* ─── ERREUR 10.13 + 10.14 : tooltip CSS survol uniquement ─── */
+/* 10.13 : pointer-events:none empêche de survoler le tooltip (disparaît si curseur se déplace dessus) */
+/* 10.14 : uniquement :hover, pas d'équivalent :focus → inaccessible au clavier */
+.has-tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+}
+.has-tooltip .tooltip-content {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #212529;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 100;
+}
+.has-tooltip:hover .tooltip-content {
+  display: block;
+}
+
+@media screen and (max-width:1023px){
+  .card-height{
+    max-height:350px !important;
+  }
+}
+
 /*# sourceMappingURL=new-styles.css.map */
