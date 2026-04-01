@@ -183,12 +183,54 @@
                 </div>
             </section>
         </main>
+        <section class="py-4 bg-white border-top">
+            <div class="container px-5 text-center">
+                <p class="text-muted mb-2">Recevez nos actualités directement dans votre boîte mail.</p>
+                <button class="btn btn-primary" id="openNewsletterModal">S'abonner à la newsletter</button>
+            </div>
+        </section>
+        <div id="modalBackdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1040;"></div>
+        <div id="newsletterModal"
+             role="dialog"
+             aria-labelledby="newsletterModalTitle"
+             aria-modal="false"
+             style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+                    background:#fff; z-index:1050; padding:2rem; width:420px; max-width:90vw;
+                    box-shadow:0 8px 32px rgba(0,0,0,0.2); border-radius:12px;">
+            <h2 id="newsletterModalTitle" class="h5 fw-bold mb-3">Newsletter City Stars</h2>
+            <p class="text-muted mb-3">Renseignez votre adresse e-mail pour recevoir nos actualités.</p>
+            <div class="mb-3">
+                <label for="newsletterEmail" class="form-label">Adresse e-mail</label>
+                <input type="email" id="newsletterEmail" class="form-control" placeholder="vous@exemple.fr" />
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="newsletterConsent" />
+                <label class="form-check-label" for="newsletterConsent">J'accepte de recevoir des communications</label>
+            </div>
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-secondary" id="closeNewsletterModal">Annuler</button>
+                <button class="btn btn-primary">S'abonner</button>
+            </div>
+        </div>
+
         <div id="site-footer"></div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
-    <!-- Chart.js for last game stats -->
     <script src="js/include-partials.js"></script>
+    <script>
+        var modal = document.getElementById('newsletterModal');
+        var backdrop = document.getElementById('modalBackdrop');
+        document.getElementById('openNewsletterModal').addEventListener('click', function () {
+            modal.style.display = 'block';
+            backdrop.style.display = 'block';
+            modal.focus();
+        });
+        document.getElementById('closeNewsletterModal').addEventListener('click', function () {
+            modal.style.display = 'none';
+            backdrop.style.display = 'none';
+        });
+    </script>
 </body>
 </html>

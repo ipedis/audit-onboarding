@@ -109,6 +109,23 @@
                                     </div>
                                 </fieldset>
 
+                                <!-- 12.9 : champ "Date de naissance" avec piège clavier -->
+                                <h2 class="fw-bold mb-3 fs-5 text-uppercase text-muted border-bottom pb-2">Date de naissance</h2>
+                                <div class="mb-4">
+                                    <p class="text-muted small mb-2">Utilisez le sélecteur ci-dessous pour indiquer votre date de naissance.</p>
+                                    <div id="date-trap-widget"
+                                         class="border rounded p-3 bg-light d-inline-flex align-items-center gap-2"
+                                         tabindex="0"
+                                         role="spinbutton"
+                                         aria-label="Sélecteur de date de naissance"
+                                         aria-valuetext="01/01/1990">
+                                        <span class="fw-bold">📅</span>
+                                        <span id="date-display">01 / 01 / 1990</span>
+                                        <span class="text-muted small ms-2">← → pour changer</span>
+                                    </div>
+                                    <div class="text-muted small mt-1">Appuyez sur Entrée pour valider</div>
+                                </div>
+
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-primary btn-lg">Soumettre ma demande d'adhésion</button>
                                 </div>
@@ -122,9 +139,29 @@
         </main>
         <div id="site-footer"></div>
         <script src="js/include-partials.js"></script>
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script>
+            // 12.9 : piège clavier — le widget capture tous les événements et ne laisse pas le focus en sortir
+            (function () {
+                var widget = document.getElementById('date-trap-widget');
+                if (!widget) return;
+                widget.addEventListener('keydown', function (e) {
+                    // Intercepte Tab, Shift+Tab, Escape ET toutes les autres touches
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Simule un changement de valeur pour paraître fonctionnel
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+                        document.getElementById('date-display').textContent = '02 / 01 / 1990';
+                        widget.setAttribute('aria-valuetext', '02/01/1990');
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+                        document.getElementById('date-display').textContent = '01 / 01 / 1990';
+                        widget.setAttribute('aria-valuetext', '01/01/1990');
+                    }
+                    // Tab, Shift+Tab et Escape ne font rien → piège clavier
+                    return false;
+                });
+            })();
+        </script>
     </body>
 </html>
