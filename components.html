@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Composants interactifs — City Stars BC</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/new-styles.css">
+    <style>
+        /* ── Styles spécifiques aux composants d'exercice ───────────────── */
+
+        .comp-section { border-bottom: 1px solid #dee2e6; padding: 2.5rem 0; }
+        .comp-section:last-child { border-bottom: none; }
+
+        /* Accordéon custom (boutons en div) */
+        .acc-header { background: #f8f9fa; padding: 12px 16px; cursor: pointer; border: 1px solid #dee2e6; margin-top: -1px; font-weight: 600; }
+        .acc-header:hover { background: #e9ecef; }
+        .acc-panel { padding: 12px 16px; border: 1px solid #dee2e6; border-top: none; display: none; }
+        .acc-panel.open { display: block; }
+
+        /* Barre de navigation secondaire */
+        .nav-demo { background: #343a40; padding: 10px 0; }
+        .nav-demo a { color: #fff; text-decoration: none; padding: 8px 14px; display: inline-block; }
+        .nav-demo a:hover { background: rgba(255,255,255,.1); }
+        .nav-demo .sub-menu { display: none; position: absolute; background: #343a40; min-width: 180px; z-index: 10; }
+        .nav-demo .has-sub:hover > .sub-menu { display: block; }
+
+        /* Fly-out menu */
+        .flyout-wrap { position: relative; display: inline-block; }
+        .flyout-trigger { cursor: pointer; }
+        .flyout-panel { display: none; position: absolute; top: 100%; left: 0; background: #fff; border: 1px solid #dee2e6; min-width: 220px; z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+        .flyout-panel.show { display: block; }
+        .flyout-panel [role="menuitem"] { display: block; padding: 8px 16px; text-decoration: none; color: #212529; }
+        .flyout-panel [role="menuitem"]:hover { background: #f8f9fa; }
+
+        /* Popover */
+        .pop-trigger { position: relative; display: inline-block; }
+        .pop-content { display: none; position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: #212529; color: #fff; padding: 10px 14px; border-radius: 6px; min-width: 200px; z-index: 10; font-size: .875rem; }
+        .pop-content::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border: 6px solid transparent; border-top-color: #212529; }
+
+        /* Tab panel */
+        .tab-list { display: flex; border-bottom: 2px solid #dee2e6; gap: 0; }
+        .tab-btn { padding: 10px 20px; border: none; background: transparent; cursor: pointer; border-bottom: 3px solid transparent; font-weight: 500; color: #6c757d; }
+        .tab-btn.active { color: #0d6efd; border-bottom-color: #0d6efd; }
+        .tab-content-panel { padding: 16px 0; display: none; }
+        .tab-content-panel.active { display: block; }
+
+        /* Faux select */
+        .fake-select { position: relative; display: inline-block; min-width: 220px; }
+        .fake-select-display { border: 1px solid #ced4da; border-radius: 4px; padding: 8px 12px; cursor: pointer; background: #fff; }
+        .fake-select-display::after { content: '▾'; float: right; }
+        .fake-select-list { display: none; position: absolute; top: 100%; left: 0; right: 0; border: 1px solid #ced4da; border-top: none; background: #fff; z-index: 10; max-height: 200px; overflow-y: auto; }
+        .fake-select-list.open { display: block; }
+        .fake-select-list div { padding: 8px 12px; cursor: pointer; }
+        .fake-select-list div:hover { background: #e9ecef; }
+
+        /* Autocomplete */
+        .autocomplete-wrap { position: relative; display: inline-block; min-width: 280px; }
+        .autocomplete-suggestions { display: none; position: absolute; top: 100%; left: 0; right: 0; border: 1px solid #ced4da; border-top: none; background: #fff; z-index: 10; }
+        .autocomplete-suggestions.open { display: block; }
+        .autocomplete-suggestions div { padding: 8px 12px; cursor: pointer; }
+        .autocomplete-suggestions div:hover { background: #e9ecef; }
+
+        /* Burger menu mobile */
+        .burger-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 999; }
+        .burger-overlay.open { display: block; }
+        .burger-drawer { position: fixed; top: 0; left: -280px; width: 280px; height: 100vh; background: #fff; z-index: 1000; transition: left .3s; padding: 20px; }
+        .burger-drawer.open { left: 0; }
+        .burger-drawer a { display: block; padding: 10px 0; color: #212529; text-decoration: none; border-bottom: 1px solid #eee; }
+
+        /* Fil d'Ariane */
+        .breadcrumb-custom { display: flex; gap: 4px; list-style: none; padding: 0; font-size: .9rem; }
+        .breadcrumb-custom li::after { content: '/'; margin-left: 8px; color: #6c757d; }
+        .breadcrumb-custom li:last-child::after { content: ''; }
+
+        /* Radio/checkbox custom */
+        .custom-radio, .custom-checkbox { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0; }
+        .custom-radio .indicator { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #6c757d; display: inline-block; }
+        .custom-radio .indicator.checked { border-color: #0d6efd; background: radial-gradient(#0d6efd 40%, transparent 41%); }
+        .custom-checkbox .indicator { width: 18px; height: 18px; border-radius: 3px; border: 2px solid #6c757d; display: inline-flex; align-items: center; justify-content: center; }
+        .custom-checkbox .indicator.checked { background: #0d6efd; border-color: #0d6efd; color: #fff; font-size: 12px; }
+
+        /* Toggle */
+        .toggle-track { width: 48px; height: 26px; border-radius: 13px; background: #ccc; position: relative; cursor: pointer; display: inline-block; transition: background .2s; }
+        .toggle-track.on { background: #0d6efd; }
+        .toggle-track .toggle-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; position: absolute; top: 2px; left: 2px; transition: left .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+        .toggle-track.on .toggle-thumb { left: 24px; }
+
+        /* Toggle group */
+        .toggle-group { display: inline-flex; border: 1px solid #dee2e6; border-radius: 6px; overflow: hidden; }
+        .toggle-group-btn { padding: 8px 18px; border: none; background: #fff; cursor: pointer; border-right: 1px solid #dee2e6; }
+        .toggle-group-btn:last-child { border-right: none; }
+        .toggle-group-btn.active { background: #0d6efd; color: #fff; }
+
+        /* Tooltip */
+        .tip-wrap { position: relative; display: inline-block; }
+        .tip-bubble { display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #212529; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: .8rem; white-space: nowrap; pointer-events: none; }
+
+        /* Menubar */
+        .menubar-demo { display: flex; background: #495057; padding: 0; list-style: none; margin: 0; }
+        .menubar-demo > li { position: relative; }
+        .menubar-demo > li > a { display: block; padding: 10px 18px; color: #fff; text-decoration: none; }
+        .menubar-demo > li > a:hover { background: #6c757d; }
+        .menubar-demo .submenu { display: none; position: absolute; top: 100%; left: 0; background: #495057; list-style: none; padding: 0; min-width: 200px; }
+        .menubar-demo > li:hover .submenu { display: block; }
+        .menubar-demo .submenu a { display: block; padding: 8px 18px; color: #fff; text-decoration: none; }
+        .menubar-demo .submenu a:hover { background: #6c757d; }
+
+        /* Pagination */
+        .pagination-custom { display: flex; gap: 4px; list-style: none; padding: 0; }
+        .pagination-custom a, .pagination-custom span { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #dee2e6; border-radius: 4px; text-decoration: none; color: #212529; }
+        .pagination-custom .current { background: #0d6efd; color: #fff; border-color: #0d6efd; }
+
+        /* Status messages area */
+        .status-area { min-height: 24px; padding: 4px 0; font-size: .9rem; }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+    <div id="site-header"></div>
+    <main class="flex-shrink-0" id="contenu-principal">
+        <section class="py-5 bg-light">
+            <div class="container px-5">
+                <div class="text-center">
+                    <h1 class="fw-bolder">Composants interactifs</h1>
+                    <p class="lead fw-normal text-muted mb-0">Galerie de composants d'interface à tester pour l'accessibilité</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container px-5 my-5">
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 1. MAUVAISE NATURE DE COMPOSANT                           -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-nature">
+                <h2 class="fw-bolder mb-4">Mauvaise nature de composant</h2>
+
+                <h3 class="h5 mb-3">Bouton utilisé pour naviguer</h3>
+                <p>Consultez la page de nos tarifs :</p>
+                <!-- Erreur : un <button> est utilisé pour naviguer vers une autre page -->
+                <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Voir les tarifs</button>
+
+                <h3 class="h5 mb-3 mt-4">Lien utilisé pour déclencher une action</h3>
+                <p>Nombre de likes : <span id="like-count">0</span></p>
+                <!-- Erreur : un <a> est utilisé pour une action JS, pas pour naviguer -->
+                <a href="#" class="btn btn-outline-primary" id="btn-like" onclick="document.getElementById('like-count').textContent = parseInt(document.getElementById('like-count').textContent)+1; return false;">
+                    <i class="bi-heart-fill"></i> J'aime
+                </a>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 2. ACCORDÉON                                              -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-accordion">
+                <h2 class="fw-bolder mb-4">Accordéon</h2>
+
+                <!-- Erreur : les en-têtes sont des <div> non focusables, pas de role="button",
+                     aria-expanded présent mais jamais mis à jour, état ouvert/fermé non annoncé -->
+                <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+                    Horaires d'entraînement
+                </div>
+                <div class="acc-panel">
+                    <p>Mardi et jeudi de 19h à 21h, samedi de 10h à 12h.</p>
+                </div>
+
+                <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+                    Tarifs et cotisations
+                </div>
+                <div class="acc-panel">
+                    <p>Découverte : gratuit. Loisir : 180 €/an. Compétition : 320 €/an.</p>
+                </div>
+
+                <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+                    Équipement requis
+                </div>
+                <div class="acc-panel">
+                    <p>Chaussures de salle obligatoires, tenue de sport, gourde d'eau.</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 3. BARRE DE NAVIGATION                                    -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-navbar">
+                <h2 class="fw-bolder mb-4">Barre de navigation</h2>
+
+                <!-- Erreur : pas de role="navigation", pas de <nav>,
+                     sous-menu uniquement au hover,
+                     deux barres de nav sans nom accessible -->
+                <div class="nav-demo">
+                    <div class="container d-flex align-items-center">
+                        <a href="#!">Accueil</a>
+                        <a href="#!">Calendrier</a>
+                        <span class="has-sub" style="position:relative;">
+                            <a href="#!">Équipes ▾</a>
+                            <div class="sub-menu">
+                                <a href="#!">Seniors</a>
+                                <a href="#!">U18</a>
+                                <a href="#!">U14</a>
+                            </div>
+                        </span>
+                        <a href="#!">Contact</a>
+                    </div>
+                </div>
+                <div class="nav-demo mt-2" style="background:#6c757d;">
+                    <div class="container d-flex align-items-center">
+                        <a href="#!">Mon compte</a>
+                        <a href="#!">Mes inscriptions</a>
+                        <a href="#!">Déconnexion</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 4. FLY-OUT MENU                                           -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-flyout">
+                <h2 class="fw-bolder mb-4">Fly-out menu</h2>
+
+                <!-- Erreur : disparaît au hover (mouseout ferme),
+                     pas de fermeture Échap,
+                     role="menu" utilisé mais structure non respectée (pas de role="menuitem" sur <a>) -->
+                <div class="flyout-wrap" id="flyout-1">
+                    <button class="btn btn-secondary flyout-trigger" id="flyout-btn"
+                        onmouseenter="document.getElementById('flyout-panel').classList.add('show')"
+                        onmouseleave="setTimeout(function(){ document.getElementById('flyout-panel').classList.remove('show'); }, 200)">
+                        Actions rapides
+                    </button>
+                    <div class="flyout-panel" id="flyout-panel" role="menu"
+                         onmouseenter="this.classList.add('show')"
+                         onmouseleave="this.classList.remove('show')">
+                        <!-- Erreur : les items ont role="menuitem" mais sont des <a>,
+                             la structure menu/menuitem attendrait des interactions flèches -->
+                        <a href="#!" role="menuitem">Réserver un terrain</a>
+                        <a href="#!" role="menuitem">Contacter l'entraîneur</a>
+                        <a href="#!" role="menuitem">Télécharger le planning</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 5. POPOVER                                                -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-popover">
+                <h2 class="fw-bolder mb-4">Popover</h2>
+
+                <!-- Erreur : contenu non accessible au lecteur d'écran (aria-hidden="true"),
+                     pas de focus à l'ouverture,
+                     role="dialog" utilisé sans aria-labelledby -->
+                <span class="pop-trigger">
+                    <button class="btn btn-info text-white" id="pop-btn"
+                        onclick="document.getElementById('pop-box').style.display = document.getElementById('pop-box').style.display === 'block' ? 'none' : 'block';">
+                        Informations sur la licence sportive
+                    </button>
+                    <div class="pop-content" id="pop-box" role="dialog" aria-hidden="true">
+                        <strong>Licence sportive</strong><br>
+                        La licence est obligatoire pour participer aux compétitions officielles.
+                        Elle couvre l'assurance et donne accès aux championnats départementaux et régionaux.
+                        <br><a href="#!">En savoir plus</a>
+                    </div>
+                </span>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 6. TAB PANEL                                              -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-tabs">
+                <h2 class="fw-bolder mb-4">Onglets (Tab panel)</h2>
+
+                <!-- Erreur : pas de role="tablist", onglets sans role="tab",
+                     navigation flèches non fonctionnelle,
+                     onglet actif non annoncé,
+                     aria-controls ne correspond à aucun id -->
+                <div class="tab-list" id="demo-tabs">
+                    <button class="tab-btn active" aria-controls="panel-xxx" onclick="switchTab(this, 'tab-panel-1')">Résultats</button>
+                    <button class="tab-btn" aria-controls="panel-yyy" onclick="switchTab(this, 'tab-panel-2')">Classement</button>
+                    <button class="tab-btn" aria-controls="panel-zzz" onclick="switchTab(this, 'tab-panel-3')">Calendrier</button>
+                </div>
+                <div class="tab-content-panel active" id="tab-panel-1">
+                    <p>Derniers résultats : City Stars 78 – 65 Les Raptors. Victoire en quart de finale du tournoi régional.</p>
+                </div>
+                <div class="tab-content-panel" id="tab-panel-2">
+                    <p>1. City Stars BC — 24 pts | 2. AS Dunk — 21 pts | 3. Ville-sur-Mer BC — 18 pts</p>
+                </div>
+                <div class="tab-content-panel" id="tab-panel-3">
+                    <p>Prochain match : 15 mars 2026 à 20h contre Union Athlétique (Gymnase municipal).</p>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 7. LISTE DÉROULANTE (faux select)                         -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-select">
+                <h2 class="fw-bolder mb-4">Liste déroulante</h2>
+
+                <label class="form-label fw-bold">Choisir une catégorie :</label>
+                <!-- Erreur : faux select non accessible, pas de role="combobox",
+                     valeur non annoncée, navigation clavier impossible -->
+                <div class="fake-select" id="fake-select-1">
+                    <div class="fake-select-display" onclick="this.nextElementSibling.classList.toggle('open')">
+                        Sélectionner…
+                    </div>
+                    <div class="fake-select-list">
+                        <div onclick="selectOption(this)">Seniors</div>
+                        <div onclick="selectOption(this)">U18 Masculin</div>
+                        <div onclick="selectOption(this)">U18 Féminin</div>
+                        <div onclick="selectOption(this)">U14</div>
+                        <div onclick="selectOption(this)">Loisir adulte</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 8. LISTE DÉROULANTE AVEC AUTOCOMPLÉTION                   -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-autocomplete">
+                <h2 class="fw-bolder mb-4">Liste déroulante avec autocomplétion</h2>
+
+                <label class="form-label fw-bold" for="player-search">Rechercher un joueur :</label>
+                <!-- Erreur : suggestions non accessibles, navigation clavier impossible,
+                     aria-activedescendant pointe vers rien -->
+                <div class="autocomplete-wrap">
+                    <input type="text" class="form-control" id="player-search"
+                           aria-activedescendant="suggestion-active"
+                           placeholder="Tapez un nom…"
+                           oninput="showSuggestions(this.value)">
+                    <div class="autocomplete-suggestions" id="ac-suggestions">
+                        <!-- Remplies dynamiquement -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 9. BURGER MENU                                            -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-burger">
+                <h2 class="fw-bolder mb-4">Menu burger</h2>
+
+                <!-- Erreur : focus reste derrière, pas de fermeture Échap,
+                     aria-expanded toujours à false -->
+                <button class="btn btn-dark" id="burger-open-btn" aria-expanded="false"
+                    onclick="document.getElementById('burger-drawer').classList.add('open'); document.getElementById('burger-overlay').classList.add('open');">
+                    <i class="bi-list"></i> Menu
+                </button>
+                <div class="burger-overlay" id="burger-overlay"
+                     onclick="document.getElementById('burger-drawer').classList.remove('open'); this.classList.remove('open');"></div>
+                <div class="burger-drawer" id="burger-drawer">
+                    <div class="fw-bold mb-3 fs-5">Navigation</div>
+                    <a href="#!">Accueil</a>
+                    <a href="#!">À propos</a>
+                    <a href="#!">Statistiques</a>
+                    <a href="#!">Contact</a>
+                    <a href="#!">Tarifs</a>
+                    <a href="#!">FAQ</a>
+                    <button class="btn btn-outline-secondary mt-3 w-100"
+                        onclick="document.getElementById('burger-drawer').classList.remove('open'); document.getElementById('burger-overlay').classList.remove('open');">
+                        Fermer
+                    </button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 10. FIL D'ARIANE                                          -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-breadcrumb">
+                <h2 class="fw-bolder mb-4">Fil d'Ariane</h2>
+
+                <!-- Erreur : dernier élément cliquable,
+                     pas d'indication de page active,
+                     aria-current mal utilisé (sur un élément intermédiaire) -->
+                <nav>
+                    <ul class="breadcrumb-custom">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="blog-home.html" aria-current="page">Blog</a></li>
+                        <li><a href="components.html">Composants interactifs</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 11. BOUTON RADIO CUSTOM                                   -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-radio">
+                <h2 class="fw-bolder mb-4">Boutons radio personnalisés</h2>
+
+                <p class="fw-bold mb-2">Choisissez votre créneau préféré :</p>
+                <!-- Erreur : non focusable (pas de tabindex),
+                     pas de role="radio" ni role="radiogroup",
+                     état non annoncé -->
+                <div>
+                    <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="mardi" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>Mardi soir — 19h à 21h</span>
+                    </div>
+                    <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="jeudi" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>Jeudi soir — 19h à 21h</span>
+                    </div>
+                    <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="samedi" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>Samedi matin — 10h à 12h</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 12. CASE À COCHER CUSTOM                                  -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-checkbox">
+                <h2 class="fw-bolder mb-4">Cases à cocher personnalisées</h2>
+
+                <p class="fw-bold mb-2">Options supplémentaires :</p>
+                <!-- Erreur : activation souris uniquement (pas de tabindex, pas de keydown),
+                     pas d'état annoncé, aria-checked présent mais jamais mis à jour -->
+                <div>
+                    <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>Recevoir le maillot du club</span>
+                    </div>
+                    <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>Participer aux tournois amicaux</span>
+                    </div>
+                    <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+                        <span class="indicator"></span>
+                        <span>S'inscrire à la newsletter</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 13. MODALE                                                -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-modal">
+                <h2 class="fw-bolder mb-4">Fenêtre modale</h2>
+
+                <!-- Erreur : pas de focus initial, focus sort de la modale,
+                     pas de role="dialog", pas de nom accessible -->
+                <button class="btn btn-primary" id="open-modal-btn"
+                    onclick="document.getElementById('custom-modal').style.display='block'; document.getElementById('modal-backdrop').style.display='block';">
+                    Confirmer l'inscription
+                </button>
+                <div id="modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:1040;"></div>
+                <div id="custom-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#fff; border-radius:8px; padding:24px; z-index:1050; min-width:380px; box-shadow: 0 8px 30px rgba(0,0,0,.3);">
+                    <h3 class="h5 fw-bold mb-3">Confirmer votre inscription</h3>
+                    <p>Vous êtes sur le point de valider votre adhésion à City Stars BC pour la saison 2025-2026.</p>
+                    <p class="text-muted small">Montant : 180 € — Formule Loisir</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <button class="btn btn-primary"
+                            onclick="document.getElementById('custom-modal').style.display='none'; document.getElementById('modal-backdrop').style.display='none';">
+                            Confirmer
+                        </button>
+                        <button class="btn btn-outline-secondary"
+                            onclick="document.getElementById('custom-modal').style.display='none'; document.getElementById('modal-backdrop').style.display='none';">
+                            Annuler
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 14. BOUTON À BASCULE (TOGGLE)                             -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-toggle">
+                <h2 class="fw-bolder mb-4">Bouton à bascule (Toggle)</h2>
+
+                <!-- Erreur : changement visuel uniquement, non activable au clavier,
+                     pas de aria-pressed -->
+                <div class="d-flex align-items-center gap-3">
+                    <span class="fw-bold">Recevoir les notifications :</span>
+                    <span class="toggle-track" id="toggle-notif" onclick="this.classList.toggle('on');">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 15. GROUPE DE BOUTONS À BASCULE                           -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-toggle-group">
+                <h2 class="fw-bolder mb-4">Groupe de boutons à bascule</h2>
+
+                <!-- Erreur : pas de role="group", aria-pressed incohérent,
+                     sélection active non identifiable programmatiquement -->
+                <p class="fw-bold mb-2">Afficher par saison :</p>
+                <div class="toggle-group">
+                    <button class="toggle-group-btn active" aria-pressed="false" onclick="toggleGroupSelect(this)">2023-2024</button>
+                    <button class="toggle-group-btn" aria-pressed="false" onclick="toggleGroupSelect(this)">2024-2025</button>
+                    <button class="toggle-group-btn" aria-pressed="false" onclick="toggleGroupSelect(this)">2025-2026</button>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 16. INFOBULLE                                             -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-tooltip">
+                <h2 class="fw-bolder mb-4">Infobulle</h2>
+
+                <!-- Erreur : hover uniquement (pas de focus),
+                     disparaît immédiatement au mouseout,
+                     role="tooltip" sans aria-describedby sur le déclencheur -->
+                <p>Passez la souris sur le terme pour plus d'information :</p>
+                <p>
+                    L'adhésion annuelle couvre la
+                    <span class="tip-wrap"
+                          onmouseenter="document.getElementById('tip-licence').style.display='block'"
+                          onmouseleave="document.getElementById('tip-licence').style.display='none'">
+                        <u>licence sportive</u>
+                        <span class="tip-bubble" id="tip-licence" role="tooltip">
+                            Document officiel délivré par la fédération permettant de participer aux compétitions.
+                        </span>
+                    </span>
+                    et l'assurance individuelle.
+                </p>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 17. MENUBAR                                               -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-menubar">
+                <h2 class="fw-bolder mb-4">Barre de menus (Menubar)</h2>
+
+                <!-- Erreur : role="menubar" utilisé mais navigation flèches absente,
+                     sous-menus non accessibles au clavier,
+                     comportement de simple navigation -->
+                <ul class="menubar-demo" role="menubar">
+                    <li role="menuitem"><a href="#!">Saison</a></li>
+                    <li role="menuitem">
+                        <a href="#!">Compétitions ▾</a>
+                        <ul class="submenu" role="menu">
+                            <li><a href="#!" role="menuitem">Championnat régional</a></li>
+                            <li><a href="#!" role="menuitem">Coupe départementale</a></li>
+                            <li><a href="#!" role="menuitem">Tournois amicaux</a></li>
+                        </ul>
+                    </li>
+                    <li role="menuitem"><a href="#!">Joueurs</a></li>
+                    <li role="menuitem"><a href="#!">Palmarès</a></li>
+                </ul>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 18. PAGINATION                                            -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-pagination">
+                <h2 class="fw-bolder mb-4">Pagination</h2>
+
+                <!-- Erreur : nav sans nom accessible (aria-label absent),
+                     lien actif non indiqué au lecteur d'écran -->
+                <nav>
+                    <ul class="pagination-custom">
+                        <li><a href="#!">«</a></li>
+                        <li><a href="#!">1</a></li>
+                        <li><span class="current">2</span></li>
+                        <li><a href="#!">3</a></li>
+                        <li><a href="#!">4</a></li>
+                        <li><a href="#!">»</a></li>
+                    </ul>
+                </nav>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 19. MESSAGES DE STATUT                                    -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-status">
+                <h2 class="fw-bolder mb-4">Messages de statut</h2>
+
+                <!-- A. Message présent mais jamais annoncé -->
+                <h3 class="h5 mb-3">A. Message non annoncé</h3>
+                <button class="btn btn-outline-primary btn-sm" onclick="document.getElementById('status-a').textContent = 'Joueur ajouté aux favoris.';">
+                    Ajouter aux favoris
+                </button>
+                <!-- Erreur : pas de role="status" ni aria-live -->
+                <div class="status-area text-success fw-bold" id="status-a"></div>
+
+                <!-- B. Message caché visuellement mais présent dans le DOM -->
+                <h3 class="h5 mb-3 mt-4">B. Message caché mais présent</h3>
+                <!-- Erreur : message de statut présent dès le chargement, annoncé par les TA au chargement -->
+                <div aria-live="assertive" role="alert" style="position:absolute; left:-9999px;">
+                    Bienvenue sur la page des composants. Chargement terminé.
+                </div>
+                <p class="text-muted small">Un message de statut est caché dans le DOM (inspectez le code source).</p>
+
+                <!-- C. Message trop verbeux -->
+                <h3 class="h5 mb-3 mt-4">C. Message trop verbeux</h3>
+                <p>Cliquez plusieurs fois sur le bouton :</p>
+                <button class="btn btn-outline-primary btn-sm" onclick="verboseStatus()">Mettre à jour</button>
+                <!-- Erreur : chaque clic déclenche une annonce -->
+                <div class="status-area" id="status-c" aria-live="assertive"></div>
+
+                <!-- D. Message non pertinent -->
+                <h3 class="h5 mb-3 mt-4">D. Message non pertinent</h3>
+                <button class="btn btn-outline-primary btn-sm"
+                    onclick="document.getElementById('status-d').textContent = 'Action effectuée avec succès.';">
+                    Valider la sélection
+                </button>
+                <!-- Erreur : annonce "Action effectuée avec succès" sans dire quelle action -->
+                <div class="status-area" id="status-d" role="status"></div>
+
+                <!-- E. Compteur mis à jour mais non détecté -->
+                <h3 class="h5 mb-3 mt-4">E. Compteur non détecté</h3>
+                <div class="d-flex align-items-center gap-3">
+                    <input type="text" class="form-control" style="max-width:200px;" placeholder="Filtrer les joueurs…"
+                        oninput="updateCounter(this.value)">
+                    <!-- Erreur : pas d'aria-live sur le compteur, la mise à jour n'est pas annoncée -->
+                    <span id="result-counter" class="text-muted">5 résultats</span>
+                </div>
+            </section>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- 20. CHANGEMENT DE CONTEXTE                                -->
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <section class="comp-section" id="comp-context">
+                <h2 class="fw-bolder mb-4">Changement de contexte</h2>
+
+                <!-- A. Résultats de recherche dynamiques -->
+                <h3 class="h5 mb-3">A. Recherche dynamique</h3>
+                <label for="search-dynamic" class="form-label">Rechercher un événement :</label>
+                <input type="text" class="form-control mb-2" id="search-dynamic" style="max-width:300px;"
+                    placeholder="Tapez un mot-clé…" oninput="dynamicSearch(this.value)">
+                <!-- Erreur : mise à jour automatique des résultats sans prévenir l'utilisateur -->
+                <div id="dynamic-results">
+                    <ul>
+                        <li>Tournoi régional amateur 2023</li>
+                        <li>Finale féminine 2023</li>
+                        <li>Tournoi U14 départemental</li>
+                        <li>Journée portes ouvertes</li>
+                    </ul>
+                </div>
+
+                <!-- B. Filtrage par boutons radio -->
+                <h3 class="h5 mb-3 mt-4">B. Filtrage automatique par sélection</h3>
+                <fieldset class="mb-2">
+                    <legend class="h6">Catégorie d'âge :</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="age-filter" id="filter-all" value="all" checked
+                            onchange="filterByAge(this.value)">
+                        <label class="form-check-label" for="filter-all">Toutes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="age-filter" id="filter-senior" value="senior"
+                            onchange="filterByAge(this.value)">
+                        <label class="form-check-label" for="filter-senior">Seniors</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="age-filter" id="filter-u18" value="u18"
+                            onchange="filterByAge(this.value)">
+                        <label class="form-check-label" for="filter-u18">U18</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="age-filter" id="filter-u14" value="u14"
+                            onchange="filterByAge(this.value)">
+                        <label class="form-check-label" for="filter-u14">U14</label>
+                    </div>
+                </fieldset>
+                <!-- Erreur : contenu se filtre automatiquement sans annonce ni avertissement -->
+                <div id="filtered-content">
+                    <div class="card p-2 mb-1 filter-item" data-cat="senior">Kelly Rowan — Seniors</div>
+                    <div class="card p-2 mb-1 filter-item" data-cat="senior">Marco Silva — Seniors</div>
+                    <div class="card p-2 mb-1 filter-item" data-cat="u18">Amir Khan — U18</div>
+                    <div class="card p-2 mb-1 filter-item" data-cat="u14">Léa Dupont — U14</div>
+                    <div class="card p-2 mb-1 filter-item" data-cat="u14">Youssef Benamar — U14</div>
+                </div>
+
+                <!-- C. Modale intrusive -->
+                <h3 class="h5 mb-3 mt-4">C. Suggestion automatique intrusive</h3>
+                <p>Faites défiler la page ou attendez quelques secondes…</p>
+                <!-- Erreur : modale apparaît automatiquement sans action de l'utilisateur -->
+            </section>
+
+        </div>
+    </main>
+    <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/include-partials.js"></script>
+
+    <script>
+        /* ── Tab panel ─────────────────────────────────────────────── */
+        function switchTab(btn, panelId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(panelId).classList.add('active');
+            // Erreur : pas de mise à jour aria-selected, pas de role="tab"
+        }
+
+        /* ── Faux select ───────────────────────────────────────────── */
+        function selectOption(el) {
+            var display = el.parentElement.previousElementSibling;
+            display.textContent = el.textContent;
+            el.parentElement.classList.remove('open');
+            // Erreur : pas d'annonce de la valeur sélectionnée
+        }
+
+        /* ── Autocomplétion ────────────────────────────────────────── */
+        var players = ['Kelly Rowan','Josiah Barclay','Evelyn Martinez','Marco Silva','Amir Khan','Léa Dupont','Youssef Benamar','Sophie Marchal'];
+        function showSuggestions(val) {
+            var box = document.getElementById('ac-suggestions');
+            box.innerHTML = '';
+            if (val.length < 1) { box.classList.remove('open'); return; }
+            var matches = players.filter(function(p) { return p.toLowerCase().indexOf(val.toLowerCase()) >= 0; });
+            if (matches.length === 0) { box.classList.remove('open'); return; }
+            matches.forEach(function(m) {
+                var d = document.createElement('div');
+                d.textContent = m;
+                d.onclick = function() {
+                    document.getElementById('player-search').value = m;
+                    box.classList.remove('open');
+                };
+                box.appendChild(d);
+            });
+            box.classList.add('open');
+            // Erreur : les suggestions n'ont pas de role="option", le conteneur n'a pas de role="listbox",
+            // aria-activedescendant pointe vers "suggestion-active" qui n'existe pas,
+            // navigation clavier impossible
+        }
+
+        /* ── Radio custom ──────────────────────────────────────────── */
+        function pickRadio(el) {
+            el.parentElement.querySelectorAll('.custom-radio .indicator').forEach(function(i) { i.classList.remove('checked'); });
+            el.querySelector('.indicator').classList.add('checked');
+            // Erreur : aria-checked n'est jamais mis à jour
+        }
+
+        /* ── Checkbox custom ───────────────────────────────────────── */
+        function toggleCheck(el) {
+            var ind = el.querySelector('.indicator');
+            var isChecked = ind.classList.toggle('checked');
+            if (isChecked) { ind.textContent = '✓'; } else { ind.textContent = ''; }
+            // Erreur : aria-checked n'est jamais mis à jour
+        }
+
+        /* ── Toggle group ──────────────────────────────────────────── */
+        function toggleGroupSelect(btn) {
+            btn.parentElement.querySelectorAll('.toggle-group-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            // Erreur : aria-pressed n'est jamais mis à jour (reste toujours "false")
+        }
+
+        /* ── Messages de statut — verbose ──────────────────────────── */
+        var verboseCount = 0;
+        function verboseStatus() {
+            verboseCount++;
+            document.getElementById('status-c').textContent =
+                'Mise à jour #' + verboseCount + ' effectuée à ' + new Date().toLocaleTimeString() +
+                '. Le système a vérifié 47 éléments, traité 12 modifications, et synchronisé les données avec le serveur principal.';
+        }
+
+        /* ── Messages de statut — compteur ─────────────────────────── */
+        function updateCounter(val) {
+            var total = 5;
+            if (val.length > 0) { total = Math.max(0, 5 - val.length); }
+            document.getElementById('result-counter').textContent = total + ' résultat' + (total > 1 ? 's' : '');
+        }
+
+        /* ── Changement de contexte — recherche dynamique ──────────── */
+        var events = [
+            'Tournoi régional amateur 2023',
+            'Finale féminine 2023',
+            'Tournoi U14 départemental',
+            'Journée portes ouvertes'
+        ];
+        function dynamicSearch(val) {
+            var container = document.getElementById('dynamic-results');
+            if (val.length === 0) {
+                container.innerHTML = '<ul>' + events.map(function(e) { return '<li>' + e + '</li>'; }).join('') + '</ul>';
+                return;
+            }
+            var filtered = events.filter(function(e) { return e.toLowerCase().indexOf(val.toLowerCase()) >= 0; });
+            container.innerHTML = filtered.length > 0
+                ? '<ul>' + filtered.map(function(e) { return '<li>' + e + '</li>'; }).join('') + '</ul>'
+                : '<p class="text-muted">Aucun résultat.</p>';
+            // Erreur : mise à jour sans aria-live, sans annonce, l'utilisateur de TA n'est pas informé
+        }
+
+        /* ── Changement de contexte — filtrage radio ───────────────── */
+        function filterByAge(val) {
+            document.querySelectorAll('.filter-item').forEach(function(el) {
+                if (val === 'all' || el.dataset.cat === val) {
+                    el.style.display = '';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            // Erreur : contenu filtré sans annonce ni zone live, l'utilisateur n'est pas prévenu
+        }
+
+        /* ── Changement de contexte — modale intrusive ─────────────── */
+        setTimeout(function() {
+            var existing = document.getElementById('intrusive-modal');
+            if (existing) return;
+            var modal = document.createElement('div');
+            modal.id = 'intrusive-modal';
+            modal.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:20px;z-index:2000;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:320px;';
+            modal.innerHTML = '<p class="fw-bold mb-2">📢 Suggestion</p>' +
+                '<p class="small mb-2">Saviez-vous que nos séances découverte sont gratuites ? Inscrivez-vous maintenant !</p>' +
+                '<button class="btn btn-sm btn-primary" onclick="this.parentElement.remove()">Fermer</button>';
+            document.body.appendChild(modal);
+            // Erreur : apparaît sans action de l'utilisateur, pas de role="alertdialog",
+            // pas de focus déplacé, pas de gestion Échap
+        }, 5000);
+    </script>
+</body>
+</html>
