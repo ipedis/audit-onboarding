@@ -100,6 +100,41 @@
         .tip-wrap { position: relative; display: inline-block; }
         .tip-bubble { display: none; position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); background: #212529; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: .8rem; white-space: nowrap; pointer-events: none; }
 
+        /* ── Carrousel swipe-only (13.10) ────────────────────────────── */
+        .carousel-swipe-wrap {
+            overflow: hidden; position: relative; border-radius: 8px;
+            user-select: none; touch-action: pan-y;
+            cursor: grab;
+        }
+        .carousel-swipe-wrap:active { cursor: grabbing; }
+        .carousel-swipe-track {
+            display: flex; transition: transform .35s ease;
+        }
+        .carousel-swipe-slide {
+            min-width: 100%; position: relative;
+        }
+        .carousel-swipe-slide img {
+            width: 100%; height: 220px; object-fit: cover; display: block; border-radius: 8px;
+        }
+        .carousel-swipe-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: rgba(0,0,0,.55); color: #fff;
+            padding: .5rem 1rem; border-radius: 0 0 8px 8px; font-size: .9rem;
+        }
+        /* Aucun bouton précédent/suivant — violation 13.10 */
+
+        /* ── Bouton pointer-down (13.11) ─────────────────────────────── */
+        .action-demo-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .action-demo-card { flex: 1; min-width: 240px; border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; }
+        .action-demo-card.bad  { border-color: #dc3545; background: #fff5f5; }
+        .action-demo-card.good { border-color: #198754; background: #f0fff4; }
+        .drop-zone {
+            border: 2px dashed #adb5bd; border-radius: 6px;
+            min-height: 80px; display: flex; align-items: center; justify-content: center;
+            color: #6c757d; font-size: .9rem; transition: background .2s;
+        }
+        .drop-zone.over { background: #e9ecef; border-color: #0d6efd; }
+
         /* Menubar */
         .menubar-demo { display: flex; background: #495057; padding: 0; list-style: none; margin: 0; }
         .menubar-demo > li { position: relative; }
@@ -429,6 +464,82 @@
                     </ul>
                 </nav>
             </section>
+            <!-- ── Critère 13.10 : Carrousel sans boutons ──────────────── -->
+            <section class="comp-section" id="comp-carousel">
+                <h2 class="fw-bolder mb-2">Galerie photos — gestes multipoints</h2>
+                <p class="text-muted mb-3">
+                    Faites glisser (swipe) la galerie vers la gauche ou la droite pour naviguer entre les photos des matchs.
+                </p>
+                <div class="carousel-swipe-wrap" id="swipe-carousel" aria-label="Galerie photos City Stars BC">
+                    <div class="carousel-swipe-track" id="swipe-track">
+                        <div class="carousel-swipe-slide">
+                            <img src="assets/joueur-1.jpg" alt="Match contre Les Raptors — City Stars BC mène 78-65">
+                            <div class="carousel-swipe-caption">Victoire contre Les Raptors — 18 avril 2026</div>
+                        </div>
+                        <div class="carousel-swipe-slide">
+                            <img src="assets/joueur-2.jpg" alt="Entraînement collectif au gymnase municipal">
+                            <div class="carousel-swipe-caption">Entraînement collectif — saison 2025-2026</div>
+                        </div>
+                        <div class="carousel-swipe-slide">
+                            <img src="assets/joueur-3.jpg" alt="Podium du tournoi régional amateur 2025">
+                            <div class="carousel-swipe-caption">Tournoi régional — 2e place, 2025</div>
+                        </div>
+                        <div class="carousel-swipe-slide">
+                            <img src="assets/capitaine.jpg" alt="Kelly Rowan, capitaine de l'équipe seniors">
+                            <div class="carousel-swipe-caption">Kelly Rowan — capitaine des Seniors</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Aucun bouton précédent / suivant n'est fourni —
+                     violation du critère 13.10 : le carrousel n'est
+                     accessible qu'en glissement tactile ou en utilisant
+                     un pointeur cliqué-glissé, sans alternative à un
+                     contact en point unique (bouton). -->
+            </section>
+
+            <!-- ── Critère 13.11 : Actions au pointer-down ─────────────── -->
+            <section class="comp-section" id="comp-pointer-cancel">
+                <h2 class="fw-bolder mb-4">Annulation des actions de pointage</h2>
+
+                <div class="action-demo-grid">
+
+                    <!-- A. Déclenchement sur mousedown — non conforme 13.11 -->
+                    <div class="action-demo-card bad">
+                        <h3 class="h6 fw-bold mb-3 text-danger">
+                            <i class="bi-x-circle me-1"></i> A. Action déclenchée à l'appui (mousedown)
+                        </h3>
+                        <p class="small text-muted mb-3">
+                            Cliquez sur le bouton ci-dessous : l'action est déclenchée
+                            <strong>dès que vous appuyez</strong>, sans possibilité d'annulation
+                            en relâchant la souris hors du bouton.
+                        </p>
+                        <button class="btn btn-danger btn-sm w-100 mb-2" id="btn-mousedown"
+                            onmousedown="triggerDeleteDown()">
+                            Supprimer le joueur de la liste
+                        </button>
+                        <div class="status-area text-danger fw-bold small" id="status-mousedown"></div>
+                    </div>
+
+                    <!-- B. Déclenchement sur click (pointerup) — conforme 13.11 -->
+                    <div class="action-demo-card good">
+                        <h3 class="h6 fw-bold mb-3 text-success">
+                            <i class="bi-check-circle me-1"></i> B. Action déclenchée au relâchement (click)
+                        </h3>
+                        <p class="small text-muted mb-3">
+                            Cliquez sur le bouton ci-dessous : l'action n'est déclenchée
+                            qu'au <strong>relâchement</strong>. En maintenant le bouton enfoncé et
+                            en déplaçant le curseur hors du bouton avant de relâcher, l'action est annulée.
+                        </p>
+                        <button class="btn btn-success btn-sm w-100 mb-2" id="btn-click"
+                            onclick="triggerDeleteUp()">
+                            Supprimer le joueur de la liste
+                        </button>
+                        <div class="status-area text-success fw-bold small" id="status-click"></div>
+                    </div>
+
+                </div>
+            </section>
+
             <section class="comp-section" id="comp-status">
                 <h2 class="fw-bolder mb-4">Messages de statut</h2>
                 <h3 class="h5 mb-3">A. Message non annoncé</h3>
@@ -614,6 +725,52 @@
                     el.style.display = 'none';
                 }
             });
+        }
+
+        /* ── Carrousel swipe-only — 13.10 ──────────────────────────── */
+        (function () {
+            var track   = document.getElementById('swipe-track');
+            var wrap    = document.getElementById('swipe-carousel');
+            if (!track || !wrap) return;
+            var slides  = track.querySelectorAll('.carousel-swipe-slide');
+            var current = 0;
+            var startX  = 0;
+            var isDragging = false;
+
+            function goTo(index) {
+                current = Math.max(0, Math.min(index, slides.length - 1));
+                track.style.transform = 'translateX(-' + (current * 100) + '%)';
+            }
+
+            /* Touch events */
+            wrap.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+            wrap.addEventListener('touchend', function(e) {
+                var diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+            });
+
+            /* Mouse drag */
+            wrap.addEventListener('mousedown', function(e) {
+                startX = e.clientX; isDragging = true; e.preventDefault();
+            });
+            document.addEventListener('mouseup', function(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                var diff = startX - e.clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+            });
+        })();
+
+        /* ── Pointer-down / click — 13.11 ───────────────────────────── */
+        function triggerDeleteDown() {
+            document.getElementById('status-mousedown').textContent =
+                'Action déclenchée à l\'appui — impossible d\'annuler !';
+        }
+        function triggerDeleteUp() {
+            document.getElementById('status-click').textContent =
+                'Action déclenchée au relâchement — vous pouviez glisser hors du bouton pour annuler.';
         }
 
         /* ── Changement de contexte — modale intrusive ─────────────── */

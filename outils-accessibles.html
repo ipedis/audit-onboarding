@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Liste d'outils d'audit accessibilité — Version accessible</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/new-styles.css">
+    <style>
+        .tools-table th { background: #0d6efd; color: #fff; font-weight: 600; }
+        .tools-table td, .tools-table th { padding: .6rem 1rem; vertical-align: top; }
+        .tools-table tr:nth-child(even) td { background: #f8f9fa; }
+        .tools-table a { word-break: break-all; }
+        .doc-intro { border-left: 4px solid #0d6efd; padding: .75rem 1rem; background: #f0f5ff; }
+        .pdf-ref { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: .6rem 1rem; font-size: .9rem; }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+    <div id="site-header"></div>
+
+    <main class="flex-shrink-0" id="contenu-principal">
+
+        <!-- Hero -->
+        <section class="py-5 bg-dark text-white">
+            <div class="container px-5 text-center">
+                <h1 class="fw-bolder mb-2">Liste d'outils d'audit accessibilité</h1>
+                <p class="lead mb-0">Version HTML accessible — IPEDIS / DocAxess 2026</p>
+            </div>
+        </section>
+
+        <div class="container px-5 my-5">
+
+            <!-- Référence au document source -->
+            <p class="pdf-ref mb-4">
+                <i class="bi-file-earmark-pdf text-danger me-2"></i>
+                Ce document est la version HTML accessible du PDF
+                <a href="assets/Liste-outils-Ipedis-2026.pdf">Liste d'outils x Ipedis 2026 (PDF, 435 Ko)</a>.
+                Il contient exactement les mêmes informations dans un format structuré et navigable.
+            </p>
+
+            <!-- Introduction -->
+            <div class="doc-intro mb-5">
+                <p class="mb-0">
+                    Le tableau ci-dessous contient une liste d'outils (extensions, navigateurs Chrome &amp; Firefox
+                    et logiciels) que nous fournissons aux clients lorsque nous devons faire des audits
+                    sur des postes fournis par le client.
+                </p>
+            </div>
+
+            <!-- Section Chrome -->
+            <section aria-labelledby="titre-chrome">
+                <h2 id="titre-chrome" class="fw-bolder mb-3">
+                    <i class="bi-browser-chrome me-2"></i>Extensions et logiciels — Google Chrome
+                </h2>
+                <div class="table-responsive mb-5">
+                    <table class="table table-bordered tools-table">
+                        <caption class="visually-hidden">Liste des 13 outils disponibles pour Google Chrome</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width:3rem;">N°</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Lien de téléchargement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Inspecteur A11y</td>
+                                <td>Extension Chrome</td>
+                                <td><a href="https://chromewebstore.google.com/detail/jfpllnmjnbbnakoinajcaolkbhibmfdp" hreflang="en">
+                                    Installer Inspecteur A11y sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>Zoom &amp; Read</td>
+                                <td>Extension Chrome</td>
+                                <td><a href="https://chromewebstore.google.com/detail/zoom-read-%E2%80%93-chrome-extens/mamgplcihonkbopicdfhbadppehecgoa" hreflang="en">
+                                    Installer Zoom &amp; Read sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>Web Developer</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chrome.google.com/webstore/detail/webdeveloper/bfbameneiokkgbdmiekhjnmfkcnldhhm?hl=fr" hreflang="en">
+                                    Installer Web Developer sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td>axe DevTools — Web Accessibility Testing</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chrome.google.com/webstore/detail/axe-devtools-webaccessib/lhdoppojpmngadmnindnejefpokejbdd" hreflang="en">
+                                    Installer axe DevTools sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>WAVE Evaluation Tool</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chromewebstore.google.com/detail/wave-evaluationtool/jbbplnpkjmmeebjpijfedlgcdilocofh" hreflang="en">
+                                    Installer WAVE sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>06</td>
+                                <td>WCAG Color Contrast Checker</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chromewebstore.google.com/detail/wcag-color-contrastcheck/plnahcmalebffmaghcpcmpaciebdhgdf" hreflang="en">
+                                    Installer WCAG Color Contrast Checker sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>07</td>
+                                <td>Tanaguru WebText</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chromewebstore.google.com/detail/tanaguruwebext/hhopdkekcmkdfpdjbpajmmfbheglcaac" hreflang="en">
+                                    Installer Tanaguru WebText sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>08</td>
+                                <td>Stylus</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chromewebstore.google.com/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne" hreflang="en">
+                                    Installer Stylus sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>09</td>
+                                <td>Assistant RGAA</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://chromewebstore.google.com/detail/assistantrgaa/cgpmofepeeiaaljkcclfldhaalfpcand" hreflang="en">
+                                    Installer Assistant RGAA sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Taba11y</td>
+                                <td>Extension Chrome</td>
+                                <td><a href="https://chrome.google.com/webstore/detail/taba11y/aocppmckdocddjkphmofnklcjhdidgmga" hreflang="en">
+                                    Installer Taba11y sur Chrome Web Store</a></td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td>PAC 2026 — PDF Accessibility Checker</td>
+                                <td>Logiciel</td>
+                                <td><a href="https://pac.pdf-accessibility.org/en" hreflang="en">
+                                    Télécharger PAC 2026 sur pac.pdf-accessibility.org</a></td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td>Google Chrome</td>
+                                <td>Logiciel</td>
+                                <td><a href="https://www.google.com/intl/fr_fr/chrome/">
+                                    Télécharger Google Chrome</a></td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td>NVDA</td>
+                                <td>Logiciel</td>
+                                <td><a href="https://www.nvaccess.org/download/" hreflang="en">
+                                    Télécharger NVDA sur nvaccess.org</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section Firefox -->
+            <section aria-labelledby="titre-firefox">
+                <h2 id="titre-firefox" class="fw-bolder mb-3">
+                    <i class="bi-browser-firefox me-2"></i>Extensions et logiciels — Mozilla Firefox
+                </h2>
+                <div class="table-responsive mb-5">
+                    <table class="table table-bordered tools-table">
+                        <caption class="visually-hidden">Liste des 7 outils disponibles pour Mozilla Firefox</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width:3rem;">N°</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Lien de téléchargement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>Web Developer</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/en-US/firefox/addon/webdeveloper/" hreflang="en">
+                                    Installer Web Developer sur Firefox Add-ons</a></td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>axe DevTools — Web Accessibility Testing</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/en-US/firefox/addon/axe-devtools/" hreflang="en">
+                                    Installer axe DevTools sur Firefox Add-ons</a></td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>WAVE Evaluation Tool</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/en-US/firefox/addon/wave-accessibility-tool/" hreflang="en">
+                                    Installer WAVE sur Firefox Add-ons</a></td>
+                            </tr>
+                            <tr>
+                                <td>04</td>
+                                <td>Stylus</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/en-US/firefox/addon/styl-us/" hreflang="en">
+                                    Installer Stylus sur Firefox Add-ons</a></td>
+                            </tr>
+                            <tr>
+                                <td>05</td>
+                                <td>Assistant RGAA</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/en-US/firefox/addon/assistant-rgaa/" hreflang="en">
+                                    Installer Assistant RGAA sur Firefox Add-ons</a></td>
+                            </tr>
+                            <tr>
+                                <td>06</td>
+                                <td>Firefox</td>
+                                <td>Logiciel</td>
+                                <td><a href="https://www.mozilla.org/fr/firefox/new/">
+                                    Télécharger Mozilla Firefox</a></td>
+                            </tr>
+                            <tr>
+                                <td>07</td>
+                                <td>Tanaguru Webtext</td>
+                                <td>Extension Navigateur</td>
+                                <td><a href="https://addons.mozilla.org/fr/firefox/addon/tanaguru-webext/" hreflang="en">
+                                    Installer Tanaguru Webtext sur Firefox Add-ons</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section aria-labelledby="titre-contact" class="py-4 border-top mt-2">
+                <h2 id="titre-contact" class="h5 fw-bold mb-2">Contact</h2>
+                <address class="text-muted" style="font-style: normal;">
+                    <strong>Moïse Akbaraly</strong> — Directeur Associé<br>
+                    <a href="mailto:moise@ipedis.com">moise@ipedis.com</a><br>
+                    1 Passage du Génie, 75012 Paris<br>
+                    01 43 05 66 41
+                </address>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/include-partials.js"></script>
+</body>
+</html>
