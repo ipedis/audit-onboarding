@@ -133,33 +133,21 @@
 
         <div class="container px-5 my-5">
 
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 1. MAUVAISE NATURE DE COMPOSANT                           -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-nature">
                 <h2 class="fw-bolder mb-4">Mauvaise nature de composant</h2>
 
                 <h3 class="h5 mb-3">Bouton utilisé pour naviguer</h3>
                 <p>Consultez la page de nos tarifs :</p>
-                <!-- Erreur : un <button> est utilisé pour naviguer vers une autre page -->
                 <button class="btn btn-primary" onclick="window.location.href='pricing.html'">Voir les tarifs</button>
 
                 <h3 class="h5 mb-3 mt-4">Lien utilisé pour déclencher une action</h3>
                 <p>Nombre de likes : <span id="like-count">0</span></p>
-                <!-- Erreur : un <a> est utilisé pour une action JS, pas pour naviguer -->
                 <a href="#" class="btn btn-outline-primary" id="btn-like" onclick="document.getElementById('like-count').textContent = parseInt(document.getElementById('like-count').textContent)+1; return false;">
                     <i class="bi-heart-fill"></i> J'aime
                 </a>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 2. ACCORDÉON                                              -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-accordion">
                 <h2 class="fw-bolder mb-4">Accordéon</h2>
-
-                <!-- Erreur : les en-têtes sont des <div> non focusables, pas de role="button",
-                     aria-expanded présent mais jamais mis à jour, état ouvert/fermé non annoncé -->
                 <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
                     Horaires d'entraînement
                 </div>
@@ -181,16 +169,8 @@
                     <p>Chaussures de salle obligatoires, tenue de sport, gourde d'eau.</p>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 3. BARRE DE NAVIGATION                                    -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-navbar">
                 <h2 class="fw-bolder mb-4">Barre de navigation</h2>
-
-                <!-- Erreur : pas de role="navigation", pas de <nav>,
-                     sous-menu uniquement au hover,
-                     deux barres de nav sans nom accessible -->
                 <div class="nav-demo">
                     <div class="container d-flex align-items-center">
                         <a href="#!">Accueil</a>
@@ -214,16 +194,8 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 4. FLY-OUT MENU                                           -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-flyout">
                 <h2 class="fw-bolder mb-4">Fly-out menu</h2>
-
-                <!-- Erreur : disparaît au hover (mouseout ferme),
-                     pas de fermeture Échap,
-                     role="menu" utilisé mais structure non respectée (pas de role="menuitem" sur <a>) -->
                 <div class="flyout-wrap" id="flyout-1">
                     <button class="btn btn-secondary flyout-trigger" id="flyout-btn"
                         onmouseenter="document.getElementById('flyout-panel').classList.add('show')"
@@ -233,24 +205,14 @@
                     <div class="flyout-panel" id="flyout-panel" role="menu"
                          onmouseenter="this.classList.add('show')"
                          onmouseleave="this.classList.remove('show')">
-                        <!-- Erreur : les items ont role="menuitem" mais sont des <a>,
-                             la structure menu/menuitem attendrait des interactions flèches -->
                         <a href="#!" role="menuitem">Réserver un terrain</a>
                         <a href="#!" role="menuitem">Contacter l'entraîneur</a>
                         <a href="#!" role="menuitem">Télécharger le planning</a>
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 5. POPOVER                                                -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-popover">
                 <h2 class="fw-bolder mb-4">Popover</h2>
-
-                <!-- Erreur : contenu non accessible au lecteur d'écran (aria-hidden="true"),
-                     pas de focus à l'ouverture,
-                     role="dialog" utilisé sans aria-labelledby -->
                 <span class="pop-trigger">
                     <button class="btn btn-info text-white" id="pop-btn"
                         onclick="document.getElementById('pop-box').style.display = document.getElementById('pop-box').style.display === 'block' ? 'none' : 'block';">
@@ -264,17 +226,8 @@
                     </div>
                 </span>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 6. TAB PANEL                                              -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-tabs">
                 <h2 class="fw-bolder mb-4">Onglets (Tab panel)</h2>
-
-                <!-- Erreur : pas de role="tablist", onglets sans role="tab",
-                     navigation flèches non fonctionnelle,
-                     onglet actif non annoncé,
-                     aria-controls ne correspond à aucun id -->
                 <div class="tab-list" id="demo-tabs">
                     <button class="tab-btn active" aria-controls="panel-xxx" onclick="switchTab(this, 'tab-panel-1')">Résultats</button>
                     <button class="tab-btn" aria-controls="panel-yyy" onclick="switchTab(this, 'tab-panel-2')">Classement</button>
@@ -290,16 +243,10 @@
                     <p>Prochain match : 15 mars 2026 à 20h contre Union Athlétique (Gymnase municipal).</p>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 7. LISTE DÉROULANTE (faux select)                         -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-select">
                 <h2 class="fw-bolder mb-4">Liste déroulante</h2>
 
                 <label class="form-label fw-bold">Choisir une catégorie :</label>
-                <!-- Erreur : faux select non accessible, pas de role="combobox",
-                     valeur non annoncée, navigation clavier impossible -->
                 <div class="fake-select" id="fake-select-1">
                     <div class="fake-select-display" onclick="this.nextElementSibling.classList.toggle('open')">
                         Sélectionner…
@@ -313,35 +260,21 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 8. LISTE DÉROULANTE AVEC AUTOCOMPLÉTION                   -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-autocomplete">
                 <h2 class="fw-bolder mb-4">Liste déroulante avec autocomplétion</h2>
 
                 <label class="form-label fw-bold" for="player-search">Rechercher un joueur :</label>
-                <!-- Erreur : suggestions non accessibles, navigation clavier impossible,
-                     aria-activedescendant pointe vers rien -->
                 <div class="autocomplete-wrap">
                     <input type="text" class="form-control" id="player-search"
                            aria-activedescendant="suggestion-active"
                            placeholder="Tapez un nom…"
                            oninput="showSuggestions(this.value)">
                     <div class="autocomplete-suggestions" id="ac-suggestions">
-                        <!-- Remplies dynamiquement -->
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 9. BURGER MENU                                            -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-burger">
                 <h2 class="fw-bolder mb-4">Menu burger</h2>
-
-                <!-- Erreur : focus reste derrière, pas de fermeture Échap,
-                     aria-expanded toujours à false -->
                 <button class="btn btn-dark" id="burger-open-btn" aria-expanded="false"
                     onclick="document.getElementById('burger-drawer').classList.add('open'); document.getElementById('burger-overlay').classList.add('open');">
                     <i class="bi-list"></i> Menu
@@ -362,16 +295,8 @@
                     </button>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 10. FIL D'ARIANE                                          -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-breadcrumb">
                 <h2 class="fw-bolder mb-4">Fil d'Ariane</h2>
-
-                <!-- Erreur : dernier élément cliquable,
-                     pas d'indication de page active,
-                     aria-current mal utilisé (sur un élément intermédiaire) -->
                 <nav>
                     <ul class="breadcrumb-custom">
                         <li><a href="index.html">Accueil</a></li>
@@ -380,17 +305,10 @@
                     </ul>
                 </nav>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 11. BOUTON RADIO CUSTOM                                   -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-radio">
                 <h2 class="fw-bolder mb-4">Boutons radio personnalisés</h2>
 
                 <p class="fw-bold mb-2">Choisissez votre créneau préféré :</p>
-                <!-- Erreur : non focusable (pas de tabindex),
-                     pas de role="radio" ni role="radiogroup",
-                     état non annoncé -->
                 <div>
                     <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="mardi" aria-checked="false">
                         <span class="indicator"></span>
@@ -406,16 +324,10 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 12. CASE À COCHER CUSTOM                                  -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-checkbox">
                 <h2 class="fw-bolder mb-4">Cases à cocher personnalisées</h2>
 
                 <p class="fw-bold mb-2">Options supplémentaires :</p>
-                <!-- Erreur : activation souris uniquement (pas de tabindex, pas de keydown),
-                     pas d'état annoncé, aria-checked présent mais jamais mis à jour -->
                 <div>
                     <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
                         <span class="indicator"></span>
@@ -431,15 +343,8 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 13. MODALE                                                -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-modal">
                 <h2 class="fw-bolder mb-4">Fenêtre modale</h2>
-
-                <!-- Erreur : pas de focus initial, focus sort de la modale,
-                     pas de role="dialog", pas de nom accessible -->
                 <button class="btn btn-primary" id="open-modal-btn"
                     onclick="document.getElementById('custom-modal').style.display='block'; document.getElementById('modal-backdrop').style.display='block';">
                     Confirmer l'inscription
@@ -461,15 +366,8 @@
                     </div>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 14. BOUTON À BASCULE (TOGGLE)                             -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-toggle">
                 <h2 class="fw-bolder mb-4">Bouton à bascule (Toggle)</h2>
-
-                <!-- Erreur : changement visuel uniquement, non activable au clavier,
-                     pas de aria-pressed -->
                 <div class="d-flex align-items-center gap-3">
                     <span class="fw-bold">Recevoir les notifications :</span>
                     <span class="toggle-track" id="toggle-notif" onclick="this.classList.toggle('on');">
@@ -477,15 +375,8 @@
                     </span>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 15. GROUPE DE BOUTONS À BASCULE                           -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-toggle-group">
                 <h2 class="fw-bolder mb-4">Groupe de boutons à bascule</h2>
-
-                <!-- Erreur : pas de role="group", aria-pressed incohérent,
-                     sélection active non identifiable programmatiquement -->
                 <p class="fw-bold mb-2">Afficher par saison :</p>
                 <div class="toggle-group">
                     <button class="toggle-group-btn active" aria-pressed="false" onclick="toggleGroupSelect(this)">2023-2024</button>
@@ -493,16 +384,8 @@
                     <button class="toggle-group-btn" aria-pressed="false" onclick="toggleGroupSelect(this)">2025-2026</button>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 16. INFOBULLE                                             -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-tooltip">
                 <h2 class="fw-bolder mb-4">Infobulle</h2>
-
-                <!-- Erreur : hover uniquement (pas de focus),
-                     disparaît immédiatement au mouseout,
-                     role="tooltip" sans aria-describedby sur le déclencheur -->
                 <p>Passez la souris sur le terme pour plus d'information :</p>
                 <p>
                     L'adhésion annuelle couvre la
@@ -517,16 +400,8 @@
                     et l'assurance individuelle.
                 </p>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 17. MENUBAR                                               -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-menubar">
                 <h2 class="fw-bolder mb-4">Barre de menus (Menubar)</h2>
-
-                <!-- Erreur : role="menubar" utilisé mais navigation flèches absente,
-                     sous-menus non accessibles au clavier,
-                     comportement de simple navigation -->
                 <ul class="menubar-demo" role="menubar">
                     <li role="menuitem"><a href="#!">Saison</a></li>
                     <li role="menuitem">
@@ -541,15 +416,8 @@
                     <li role="menuitem"><a href="#!">Palmarès</a></li>
                 </ul>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 18. PAGINATION                                            -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-pagination">
                 <h2 class="fw-bolder mb-4">Pagination</h2>
-
-                <!-- Erreur : nav sans nom accessible (aria-label absent),
-                     lien actif non indiqué au lecteur d'écran -->
                 <nav>
                     <ul class="pagination-custom">
                         <li><a href="#!">«</a></li>
@@ -561,67 +429,41 @@
                     </ul>
                 </nav>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 19. MESSAGES DE STATUT                                    -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-status">
                 <h2 class="fw-bolder mb-4">Messages de statut</h2>
-
-                <!-- A. Message présent mais jamais annoncé -->
                 <h3 class="h5 mb-3">A. Message non annoncé</h3>
                 <button class="btn btn-outline-primary btn-sm" onclick="document.getElementById('status-a').textContent = 'Joueur ajouté aux favoris.';">
                     Ajouter aux favoris
                 </button>
-                <!-- Erreur : pas de role="status" ni aria-live -->
                 <div class="status-area text-success fw-bold" id="status-a"></div>
-
-                <!-- B. Message caché visuellement mais présent dans le DOM -->
                 <h3 class="h5 mb-3 mt-4">B. Message caché mais présent</h3>
-                <!-- Erreur : message de statut présent dès le chargement, annoncé par les TA au chargement -->
                 <div aria-live="assertive" role="alert" style="position:absolute; left:-9999px;">
                     Bienvenue sur la page des composants. Chargement terminé.
                 </div>
                 <p class="text-muted small">Un message de statut est caché dans le DOM (inspectez le code source).</p>
-
-                <!-- C. Message trop verbeux -->
                 <h3 class="h5 mb-3 mt-4">C. Message trop verbeux</h3>
                 <p>Cliquez plusieurs fois sur le bouton :</p>
                 <button class="btn btn-outline-primary btn-sm" onclick="verboseStatus()">Mettre à jour</button>
-                <!-- Erreur : chaque clic déclenche une annonce -->
                 <div class="status-area" id="status-c" aria-live="assertive"></div>
-
-                <!-- D. Message non pertinent -->
                 <h3 class="h5 mb-3 mt-4">D. Message non pertinent</h3>
                 <button class="btn btn-outline-primary btn-sm"
                     onclick="document.getElementById('status-d').textContent = 'Action effectuée avec succès.';">
                     Valider la sélection
                 </button>
-                <!-- Erreur : annonce "Action effectuée avec succès" sans dire quelle action -->
                 <div class="status-area" id="status-d" role="status"></div>
-
-                <!-- E. Compteur mis à jour mais non détecté -->
                 <h3 class="h5 mb-3 mt-4">E. Compteur non détecté</h3>
                 <div class="d-flex align-items-center gap-3">
                     <input type="text" class="form-control" style="max-width:200px;" placeholder="Filtrer les joueurs…"
                         oninput="updateCounter(this.value)">
-                    <!-- Erreur : pas d'aria-live sur le compteur, la mise à jour n'est pas annoncée -->
                     <span id="result-counter" class="text-muted">5 résultats</span>
                 </div>
             </section>
-
-            <!-- ═══════════════════════════════════════════════════════════ -->
-            <!-- 20. CHANGEMENT DE CONTEXTE                                -->
-            <!-- ═══════════════════════════════════════════════════════════ -->
             <section class="comp-section" id="comp-context">
                 <h2 class="fw-bolder mb-4">Changement de contexte</h2>
-
-                <!-- A. Résultats de recherche dynamiques -->
                 <h3 class="h5 mb-3">A. Recherche dynamique</h3>
                 <label for="search-dynamic" class="form-label">Rechercher un événement :</label>
                 <input type="text" class="form-control mb-2" id="search-dynamic" style="max-width:300px;"
                     placeholder="Tapez un mot-clé…" oninput="dynamicSearch(this.value)">
-                <!-- Erreur : mise à jour automatique des résultats sans prévenir l'utilisateur -->
                 <div id="dynamic-results">
                     <ul>
                         <li>Tournoi régional amateur 2023</li>
@@ -630,8 +472,6 @@
                         <li>Journée portes ouvertes</li>
                     </ul>
                 </div>
-
-                <!-- B. Filtrage par boutons radio -->
                 <h3 class="h5 mb-3 mt-4">B. Filtrage automatique par sélection</h3>
                 <fieldset class="mb-2">
                     <legend class="h6">Catégorie d'âge :</legend>
@@ -656,7 +496,6 @@
                         <label class="form-check-label" for="filter-u14">U14</label>
                     </div>
                 </fieldset>
-                <!-- Erreur : contenu se filtre automatiquement sans annonce ni avertissement -->
                 <div id="filtered-content">
                     <div class="card p-2 mb-1 filter-item" data-cat="senior">Kelly Rowan — Seniors</div>
                     <div class="card p-2 mb-1 filter-item" data-cat="senior">Marco Silva — Seniors</div>
@@ -664,11 +503,8 @@
                     <div class="card p-2 mb-1 filter-item" data-cat="u14">Léa Dupont — U14</div>
                     <div class="card p-2 mb-1 filter-item" data-cat="u14">Youssef Benamar — U14</div>
                 </div>
-
-                <!-- C. Modale intrusive -->
                 <h3 class="h5 mb-3 mt-4">C. Suggestion automatique intrusive</h3>
                 <p>Faites défiler la page ou attendez quelques secondes…</p>
-                <!-- Erreur : modale apparaît automatiquement sans action de l'utilisateur -->
             </section>
 
         </div>
@@ -686,7 +522,6 @@
             document.querySelectorAll('.tab-content-panel').forEach(p => p.classList.remove('active'));
             btn.classList.add('active');
             document.getElementById(panelId).classList.add('active');
-            // Erreur : pas de mise à jour aria-selected, pas de role="tab"
         }
 
         /* ── Faux select ───────────────────────────────────────────── */
@@ -694,7 +529,6 @@
             var display = el.parentElement.previousElementSibling;
             display.textContent = el.textContent;
             el.parentElement.classList.remove('open');
-            // Erreur : pas d'annonce de la valeur sélectionnée
         }
 
         /* ── Autocomplétion ────────────────────────────────────────── */
@@ -715,16 +549,12 @@
                 box.appendChild(d);
             });
             box.classList.add('open');
-            // Erreur : les suggestions n'ont pas de role="option", le conteneur n'a pas de role="listbox",
-            // aria-activedescendant pointe vers "suggestion-active" qui n'existe pas,
-            // navigation clavier impossible
         }
 
         /* ── Radio custom ──────────────────────────────────────────── */
         function pickRadio(el) {
             el.parentElement.querySelectorAll('.custom-radio .indicator').forEach(function(i) { i.classList.remove('checked'); });
             el.querySelector('.indicator').classList.add('checked');
-            // Erreur : aria-checked n'est jamais mis à jour
         }
 
         /* ── Checkbox custom ───────────────────────────────────────── */
@@ -732,14 +562,12 @@
             var ind = el.querySelector('.indicator');
             var isChecked = ind.classList.toggle('checked');
             if (isChecked) { ind.textContent = '✓'; } else { ind.textContent = ''; }
-            // Erreur : aria-checked n'est jamais mis à jour
         }
 
         /* ── Toggle group ──────────────────────────────────────────── */
         function toggleGroupSelect(btn) {
             btn.parentElement.querySelectorAll('.toggle-group-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
-            // Erreur : aria-pressed n'est jamais mis à jour (reste toujours "false")
         }
 
         /* ── Messages de statut — verbose ──────────────────────────── */
@@ -775,7 +603,6 @@
             container.innerHTML = filtered.length > 0
                 ? '<ul>' + filtered.map(function(e) { return '<li>' + e + '</li>'; }).join('') + '</ul>'
                 : '<p class="text-muted">Aucun résultat.</p>';
-            // Erreur : mise à jour sans aria-live, sans annonce, l'utilisateur de TA n'est pas informé
         }
 
         /* ── Changement de contexte — filtrage radio ───────────────── */
@@ -787,7 +614,6 @@
                     el.style.display = 'none';
                 }
             });
-            // Erreur : contenu filtré sans annonce ni zone live, l'utilisateur n'est pas prévenu
         }
 
         /* ── Changement de contexte — modale intrusive ─────────────── */
@@ -801,8 +627,6 @@
                 '<p class="small mb-2">Saviez-vous que nos séances découverte sont gratuites ? Inscrivez-vous maintenant !</p>' +
                 '<button class="btn btn-sm btn-primary" onclick="this.parentElement.remove()">Fermer</button>';
             document.body.appendChild(modal);
-            // Erreur : apparaît sans action de l'utilisateur, pas de role="alertdialog",
-            // pas de focus déplacé, pas de gestion Échap
         }, 5000);
     </script>
 </body>
