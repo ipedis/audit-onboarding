@@ -17,7 +17,7 @@ Ces consignes s’appliquent à l’ensemble du dépôt. Le projet est un site m
 ## Architecture et dépendances
 
 - Ne pas ajouter de commentaire HTML (`<!-- ... -->`) dans les pages ou dans `src/layouts/partials/`.
-- Utiliser Node.js 24 LTS et npm. Versionner `package.json` et `package-lock.json`, mais jamais `node_modules/` ni `dist/`.
+- Utiliser Node.js 24 LTS et Yarn 4 via Corepack. Versionner `package.json` et `yarn.lock`, mais jamais `node_modules/`, `.yarn/` ni `dist/`.
 - Conserver les 17 pages dans `src/`, les scripts dans `src/js/`, le SCSS dans `src/scss/`, et les fichiers copiés tels quels dans `src/public/`.
 - Vite découvre automatiquement les pages HTML directement placées dans `src/`. Toute évolution de cet inventaire doit être explicitement cadrée et répercutée dans `scripts/check-static.mjs` et la documentation.
 - Importer les dépendances JavaScript depuis `src/js/main.js` et les dépendances de styles depuis `src/scss/global.scss`. Ne pas ajouter de CDN pour les scripts, feuilles de style, fontes ou icônes.
@@ -47,11 +47,12 @@ Ces consignes s’appliquent à l’ensemble du dépôt. Le projet est un site m
 Installer et contrôler le projet depuis sa racine :
 
 ```sh
-npm ci
-npm run check
+corepack enable
+yarn install --immutable
+yarn check
 ```
 
-Servir les sources avec `npm run dev`, puis la production avec `npm run preview`. Pour chaque changement, contrôler au minimum :
+Servir les sources avec `yarn dev`, puis la production avec `yarn preview`. Pour chaque changement, contrôler au minimum :
 
 - les pages touchées dans un navigateur ;
 - l’absence d’erreur inattendue dans la console ;
@@ -60,6 +61,6 @@ Servir les sources avec `npm run dev`, puis la production avec `npm run preview`
 - la navigation et les interactions au clavier ;
 - les scénarios pédagogiques directement concernés.
 
-Le script `npm run lint` vérifie notamment l’absence de commentaire HTML, de style statique dans les templates, de ressource technique distante et de référence locale manquante, ainsi que le contrat de layout, les 17 feuilles SCSS, la structure documentaire (`docs/exercices/` et `docs/formateur/`) et les noms de pages cités. `npm run build` confirme aussi que les 17 pages contiennent les styles et fragments attendus dans `dist/`, sans publier les fragments séparément ni laisser de référence à jsDelivr ou à `node_modules`.
+Le script `yarn lint` vérifie notamment l’absence de commentaire HTML, de style statique dans les templates, de ressource technique distante et de référence locale manquante, ainsi que le contrat de layout, les 17 feuilles SCSS, la structure documentaire (`docs/exercices/` et `docs/formateur/`) et les noms de pages cités. `yarn build` confirme aussi que les 17 pages contiennent les styles et fragments attendus dans `dist/`, sans publier les fragments séparément ni laisser de référence à jsDelivr ou à `node_modules`.
 
 Avant de terminer, inspecter le diff et confirmer qu’il reste limité au périmètre demandé. Ne pas intégrer les fichiers d’IDE, les documents de travail ou les suppressions concurrentes sans rapport avec l’intervention.

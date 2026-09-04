@@ -16,37 +16,38 @@ Le site exécuté depuis les sources Vite constitue la vérité de fonctionnemen
 ## Prérequis
 
 - Node.js 24 LTS;
-- npm 11 ou version compatible avec Node.js 24.
+- Corepack activé pour utiliser Yarn 4.12.0, verrouillé par `package.json`.
 
 La version Node attendue est aussi indiquée dans `.nvmrc`.
 
 ## Installation et commandes
 
-Installer les versions verrouillées dans `package-lock.json` :
+Activer Corepack puis installer les versions verrouillées dans `yarn.lock` :
 
 ```sh
-npm ci
+corepack enable
+yarn install --immutable
 ```
 
 Les commandes publiques sont :
 
 ```sh
-npm run dev
-npm run build
-npm run preview
-npm run lint
-npm run format
-npm run format:check
-npm run check
+yarn dev
+yarn build
+yarn preview
+yarn lint
+yarn format
+yarn format:check
+yarn check
 ```
 
-- `npm run dev` lance Vite avec rechargement à chaud;
-- `npm run build` recrée `dist/` et contrôle son contenu;
-- `npm run preview` sert le build de production;
-- `npm run lint` contrôle le JavaScript, le SCSS et les garde-fous pédagogiques;
-- `npm run format` applique Prettier aux sources techniques et à la documentation Markdown;
-- `npm run format:check` vérifie le formatage sans modifier les fichiers;
-- `npm run check` enchaîne formatage, lint et build pour un contrôle local complet.
+- `yarn dev` lance Vite avec rechargement à chaud;
+- `yarn build` recrée `dist/` et contrôle son contenu;
+- `yarn preview` sert le build de production;
+- `yarn lint` contrôle le JavaScript, le SCSS et les garde-fous pédagogiques;
+- `yarn format` applique Prettier aux sources techniques et à la documentation Markdown;
+- `yarn format:check` vérifie le formatage sans modifier les fichiers;
+- `yarn check` enchaîne formatage, lint et build pour un contrôle local complet.
 
 ## Structure du dépôt
 
@@ -71,7 +72,7 @@ npm run check
 
 `vite.config.js` découvre automatiquement les pages HTML directement placées dans `src/`. Chaque page déclare son titre, sa langue, son doctype, ses classes de structure, ses fragments et ses scripts dans un unique élément `city-stars-page`. Le plugin local `scripts/city-stars-layout.mjs` assemble ce contrat avec `src/layouts/page.html` avant que Vite ne traite la page.
 
-Le layout injecte `src/scss/global.scss`, puis `src/scss/pages/<page>.scss` afin de garantir l’ordre de cascade. Bootstrap, Bootstrap Icons et leurs fontes sont empaquetés depuis npm par la feuille globale ; `src/js/main.js` charge le JavaScript Bootstrap, les scripts communs et l’état actif de navigation. Chaque feuille sépare explicitement les styles techniques des fixtures pédagogiques qui ne doivent pas être corrigées sans cadrage.
+Le layout injecte `src/scss/global.scss`, puis `src/scss/pages/<page>.scss` afin de garantir l’ordre de cascade. Bootstrap, Bootstrap Icons et leurs fontes sont empaquetés depuis les dépendances locales par la feuille globale ; `src/js/main.js` charge le JavaScript Bootstrap, les scripts communs et l’état actif de navigation. Chaque feuille sépare explicitement les styles techniques des fixtures pédagogiques qui ne doivent pas être corrigées sans cadrage.
 
 Les fragments `src/layouts/partials/header.html` et `footer.html` sont assemblés au build et en développement : aucune requête vers `partials/` n’est effectuée dans le navigateur et ces sources ne sont pas publiées séparément dans `dist/`. Les différences intentionnelles entre certaines pages font partie du parcours et ne doivent pas être normalisées sans cadrage pédagogique.
 
@@ -90,15 +91,16 @@ Toute évolution d’un scénario doit maintenir ensemble la page concernée, sa
 Avant de terminer une intervention :
 
 ```sh
-npm ci
-npm run check
+corepack enable
+yarn install --immutable
+yarn check
 ```
 
 Servir ensuite successivement les sources et le build :
 
 ```sh
-npm run dev
-npm run preview
+yarn dev
+yarn preview
 ```
 
 Contrôler les pages concernées dans un navigateur, la console, l’en-tête et le pied assemblés, les médias, les icônes, la navigation clavier et les scénarios pédagogiques concernés.
