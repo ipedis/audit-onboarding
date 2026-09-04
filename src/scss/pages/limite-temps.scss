@@ -1,0 +1,74 @@
+/* ==========================================================
+   STYLES TECHNIQUES
+   ========================================================== */
+
+/* ==========================================================
+   FIXTURES PÉDAGOGIQUES — NE PAS CORRIGER SANS CADRAGE
+   ========================================================== */
+
+/* ── Timer ─────────────────────────────────────────────────── */
+.timer-bar {
+  background: #dee2e6;
+  border-radius: 4px;
+  height: 14px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+.timer-fill {
+  background: #0d6efd;
+  height: 100%;
+  width: 100%;
+  transition: width 1s linear;
+}
+.timer-fill.warning {
+  background: #fd7e14;
+}
+.timer-fill.danger {
+  background: #dc3545;
+}
+
+.timer-display {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.timer-display.warning {
+  color: #fd7e14;
+}
+.timer-display.danger {
+  color: #dc3545;
+}
+
+/* ── Quiz ───────────────────────────────────────────────────── */
+.quiz-question {
+  margin-bottom: 2rem;
+}
+.quiz-question legend {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+}
+.expired-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.expired-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 2rem 2.5rem;
+  max-width: 420px;
+  text-align: center;
+}
+
+.expired-overlay-hidden {
+  display: none;
+}
+
+.expired-icon {
+  font-size: 3rem;
+}

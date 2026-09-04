@@ -1,0 +1,791 @@
+<city-stars-page
+  title="Composants interactifs — City Stars BC"
+  lang="fr"
+  doctype="html"
+  body-class="d-flex flex-column h-100"
+  header="shared"
+  footer="shared"
+>
+  <page-content>
+    <main class="flex-shrink-0" id="contenu-principal">
+      <section class="py-5 bg-light">
+        <div class="container px-5">
+          <div class="text-center">
+            <h1 class="fw-bolder">Composants interactifs</h1>
+            <p class="lead fw-normal text-muted mb-0">
+              Galerie de composants d'interface à tester pour l'accessibilité
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="container px-5 my-5">
+        <section class="comp-section" id="comp-nature">
+          <h2 class="fw-bolder mb-4">Mauvaise nature de composant</h2>
+
+          <h3 class="h5 mb-3">Bouton utilisé pour naviguer</h3>
+          <p>Consultez la page de nos tarifs :</p>
+          <button class="btn btn-primary" onclick="window.location.href = 'pricing.html'">Voir les tarifs</button>
+
+          <h3 class="h5 mb-3 mt-4">Lien utilisé pour déclencher une action</h3>
+          <p>Nombre de likes : <span id="like-count">0</span></p>
+          <a
+            href="#"
+            class="btn btn-outline-primary"
+            id="btn-like"
+            onclick="
+              document.getElementById('like-count').textContent =
+                parseInt(document.getElementById('like-count').textContent) + 1;
+              return false;
+            "
+          >
+            <i class="bi-heart-fill"></i> J'aime
+          </a>
+        </section>
+        <section class="comp-section" id="comp-accordion">
+          <h2 class="fw-bolder mb-4">Accordéon</h2>
+          <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+            Horaires d'entraînement
+          </div>
+          <div class="acc-panel">
+            <p>Mardi et jeudi de 19h à 21h, samedi de 10h à 12h.</p>
+          </div>
+
+          <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+            Tarifs et cotisations
+          </div>
+          <div class="acc-panel">
+            <p>Découverte : gratuit. Loisir : 180 €/an. Compétition : 320 €/an.</p>
+          </div>
+
+          <div class="acc-header" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('open')">
+            Équipement requis
+          </div>
+          <div class="acc-panel">
+            <p>Chaussures de salle obligatoires, tenue de sport, gourde d'eau.</p>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-navbar">
+          <h2 class="fw-bolder mb-4">Barre de navigation</h2>
+          <div class="nav-demo">
+            <div class="container d-flex align-items-center">
+              <a href="#!">Accueil</a>
+              <a href="#!">Calendrier</a>
+              <span class="has-sub component-has-sub">
+                <a href="#!">Équipes ▾</a>
+                <div class="sub-menu">
+                  <a href="#!">Seniors</a>
+                  <a href="#!">U18</a>
+                  <a href="#!">U14</a>
+                </div>
+              </span>
+              <a href="#!">Contact</a>
+            </div>
+          </div>
+          <div class="nav-demo mt-2 nav-demo-muted">
+            <div class="container d-flex align-items-center">
+              <a href="#!">Mon compte</a>
+              <a href="#!">Mes inscriptions</a>
+              <a href="#!">Déconnexion</a>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-flyout">
+          <h2 class="fw-bolder mb-4">Fly-out menu</h2>
+          <div class="flyout-wrap" id="flyout-1">
+            <button
+              class="btn btn-secondary flyout-trigger"
+              id="flyout-btn"
+              onmouseenter="document.getElementById('flyout-panel').classList.add('show')"
+              onmouseleave="
+                setTimeout(function () {
+                  document.getElementById('flyout-panel').classList.remove('show');
+                }, 200)
+              "
+            >
+              Actions rapides
+            </button>
+            <div
+              class="flyout-panel"
+              id="flyout-panel"
+              role="menu"
+              onmouseenter="this.classList.add('show')"
+              onmouseleave="this.classList.remove('show')"
+            >
+              <a href="#!" role="menuitem">Réserver un terrain</a>
+              <a href="#!" role="menuitem">Contacter l'entraîneur</a>
+              <a href="#!" role="menuitem">Télécharger le planning</a>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-popover">
+          <h2 class="fw-bolder mb-4">Popover</h2>
+          <span class="pop-trigger">
+            <button
+              class="btn btn-info text-white"
+              id="pop-btn"
+              onclick="
+                document.getElementById('pop-box').style.display =
+                  document.getElementById('pop-box').style.display === 'block' ? 'none' : 'block'
+              "
+            >
+              Informations sur la licence sportive
+            </button>
+            <div class="pop-content" id="pop-box" role="dialog" aria-hidden="true">
+              <strong>Licence sportive</strong><br />
+              La licence est obligatoire pour participer aux compétitions officielles. Elle couvre l'assurance et donne
+              accès aux championnats départementaux et régionaux.
+              <br /><a href="#!">En savoir plus</a>
+            </div>
+          </span>
+        </section>
+        <section class="comp-section" id="comp-tabs">
+          <h2 class="fw-bolder mb-4">Onglets (Tab panel)</h2>
+          <div class="tab-list" id="demo-tabs">
+            <button class="tab-btn active" aria-controls="panel-xxx" onclick="switchTab(this, 'tab-panel-1')">
+              Résultats
+            </button>
+            <button class="tab-btn" aria-controls="panel-yyy" onclick="switchTab(this, 'tab-panel-2')">
+              Classement
+            </button>
+            <button class="tab-btn" aria-controls="panel-zzz" onclick="switchTab(this, 'tab-panel-3')">
+              Calendrier
+            </button>
+          </div>
+          <div class="tab-content-panel active" id="tab-panel-1">
+            <p>Derniers résultats : City Stars 78 – 65 Les Raptors. Victoire en quart de finale du tournoi régional.</p>
+          </div>
+          <div class="tab-content-panel" id="tab-panel-2">
+            <p>1. City Stars BC — 24 pts | 2. AS Dunk — 21 pts | 3. Ville-sur-Mer BC — 18 pts</p>
+          </div>
+          <div class="tab-content-panel" id="tab-panel-3">
+            <p>Prochain match : 15 mars 2026 à 20h contre Union Athlétique (Gymnase municipal).</p>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-select">
+          <h2 class="fw-bolder mb-4">Liste déroulante</h2>
+
+          <label class="form-label fw-bold">Choisir une catégorie :</label>
+          <div class="fake-select" id="fake-select-1">
+            <div class="fake-select-display" onclick="this.nextElementSibling.classList.toggle('open')">
+              Sélectionner…
+            </div>
+            <div class="fake-select-list">
+              <div onclick="selectOption(this)">Seniors</div>
+              <div onclick="selectOption(this)">U18 Masculin</div>
+              <div onclick="selectOption(this)">U18 Féminin</div>
+              <div onclick="selectOption(this)">U14</div>
+              <div onclick="selectOption(this)">Loisir adulte</div>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-autocomplete">
+          <h2 class="fw-bolder mb-4">Liste déroulante avec autocomplétion</h2>
+
+          <label class="form-label fw-bold" for="player-search">Rechercher un joueur :</label>
+          <div class="autocomplete-wrap">
+            <input
+              type="text"
+              class="form-control"
+              id="player-search"
+              aria-activedescendant="suggestion-active"
+              placeholder="Tapez un nom…"
+              oninput="showSuggestions(this.value)"
+            />
+            <div class="autocomplete-suggestions" id="ac-suggestions"></div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-burger">
+          <h2 class="fw-bolder mb-4">Menu burger</h2>
+          <button
+            class="btn btn-dark"
+            id="burger-open-btn"
+            aria-expanded="false"
+            onclick="
+              document.getElementById('burger-drawer').classList.add('open');
+              document.getElementById('burger-overlay').classList.add('open');
+            "
+          >
+            <i class="bi-list"></i> Menu
+          </button>
+          <div
+            class="burger-overlay"
+            id="burger-overlay"
+            onclick="
+              document.getElementById('burger-drawer').classList.remove('open');
+              this.classList.remove('open');
+            "
+          ></div>
+          <div class="burger-drawer" id="burger-drawer">
+            <div class="fw-bold mb-3 fs-5">Navigation</div>
+            <a href="#!">Accueil</a>
+            <a href="#!">À propos</a>
+            <a href="#!">Statistiques</a>
+            <a href="#!">Contact</a>
+            <a href="#!">Tarifs</a>
+            <a href="#!">FAQ</a>
+            <button
+              class="btn btn-outline-secondary mt-3 w-100"
+              onclick="
+                document.getElementById('burger-drawer').classList.remove('open');
+                document.getElementById('burger-overlay').classList.remove('open');
+              "
+            >
+              Fermer
+            </button>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-breadcrumb">
+          <h2 class="fw-bolder mb-4">Fil d'Ariane</h2>
+          <nav>
+            <ul class="breadcrumb-custom">
+              <li><a href="index.html">Accueil</a></li>
+              <li><a href="blog-home.html" aria-current="page">Blog</a></li>
+              <li><a href="components.html">Composants interactifs</a></li>
+            </ul>
+          </nav>
+        </section>
+        <section class="comp-section" id="comp-radio">
+          <h2 class="fw-bolder mb-4">Boutons radio personnalisés</h2>
+
+          <p class="fw-bold mb-2">Choisissez votre créneau préféré :</p>
+          <div>
+            <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="mardi" aria-checked="false">
+              <span class="indicator"></span>
+              <span>Mardi soir — 19h à 21h</span>
+            </div>
+            <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="jeudi" aria-checked="false">
+              <span class="indicator"></span>
+              <span>Jeudi soir — 19h à 21h</span>
+            </div>
+            <div class="custom-radio mb-2" onclick="pickRadio(this)" data-value="samedi" aria-checked="false">
+              <span class="indicator"></span>
+              <span>Samedi matin — 10h à 12h</span>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-checkbox">
+          <h2 class="fw-bolder mb-4">Cases à cocher personnalisées</h2>
+
+          <p class="fw-bold mb-2">Options supplémentaires :</p>
+          <div>
+            <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+              <span class="indicator"></span>
+              <span>Recevoir le maillot du club</span>
+            </div>
+            <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+              <span class="indicator"></span>
+              <span>Participer aux tournois amicaux</span>
+            </div>
+            <div class="custom-checkbox mb-2" onclick="toggleCheck(this)" aria-checked="false">
+              <span class="indicator"></span>
+              <span>S'inscrire à la newsletter</span>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-modal">
+          <h2 class="fw-bolder mb-4">Fenêtre modale</h2>
+          <button
+            class="btn btn-primary"
+            id="open-modal-btn"
+            onclick="
+              document.getElementById('custom-modal').style.display = 'block';
+              document.getElementById('modal-backdrop').style.display = 'block';
+            "
+          >
+            Confirmer l'inscription
+          </button>
+          <div class="component-modal-backdrop" id="modal-backdrop"></div>
+          <div class="component-modal" id="custom-modal">
+            <h3 class="h5 fw-bold mb-3">Confirmer votre inscription</h3>
+            <p>Vous êtes sur le point de valider votre adhésion à City Stars BC pour la saison 2025-2026.</p>
+            <p class="text-muted small">Montant : 180 € — Formule Loisir</p>
+            <div class="d-flex gap-2 mt-3">
+              <button
+                class="btn btn-primary"
+                onclick="
+                  document.getElementById('custom-modal').style.display = 'none';
+                  document.getElementById('modal-backdrop').style.display = 'none';
+                "
+              >
+                Confirmer
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                onclick="
+                  document.getElementById('custom-modal').style.display = 'none';
+                  document.getElementById('modal-backdrop').style.display = 'none';
+                "
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-toggle">
+          <h2 class="fw-bolder mb-4">Bouton à bascule (Toggle)</h2>
+          <div class="d-flex align-items-center gap-3">
+            <span class="fw-bold">Recevoir les notifications :</span>
+            <span class="toggle-track" id="toggle-notif" onclick="this.classList.toggle('on')">
+              <span class="toggle-thumb"></span>
+            </span>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-toggle-group">
+          <h2 class="fw-bolder mb-4">Groupe de boutons à bascule</h2>
+          <p class="fw-bold mb-2">Afficher par saison :</p>
+          <div class="toggle-group">
+            <button class="toggle-group-btn active" aria-pressed="false" onclick="toggleGroupSelect(this)">
+              2023-2024
+            </button>
+            <button class="toggle-group-btn" aria-pressed="false" onclick="toggleGroupSelect(this)">2024-2025</button>
+            <button class="toggle-group-btn" aria-pressed="false" onclick="toggleGroupSelect(this)">2025-2026</button>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-tooltip">
+          <h2 class="fw-bolder mb-4">Infobulle</h2>
+          <p>Passez la souris sur le terme pour plus d'information :</p>
+          <p>
+            L'adhésion annuelle couvre la
+            <span
+              class="tip-wrap"
+              onmouseenter="document.getElementById('tip-licence').style.display = 'block'"
+              onmouseleave="document.getElementById('tip-licence').style.display = 'none'"
+            >
+              <u>licence sportive</u>
+              <span class="tip-bubble" id="tip-licence" role="tooltip">
+                Document officiel délivré par la fédération permettant de participer aux compétitions.
+              </span>
+            </span>
+            et l'assurance individuelle.
+          </p>
+        </section>
+        <section class="comp-section" id="comp-menubar">
+          <h2 class="fw-bolder mb-4">Barre de menus (Menubar)</h2>
+          <ul class="menubar-demo" role="menubar">
+            <li role="menuitem"><a href="#!">Saison</a></li>
+            <li role="menuitem">
+              <a href="#!">Compétitions ▾</a>
+              <ul class="submenu" role="menu">
+                <li><a href="#!" role="menuitem">Championnat régional</a></li>
+                <li><a href="#!" role="menuitem">Coupe départementale</a></li>
+                <li><a href="#!" role="menuitem">Tournois amicaux</a></li>
+              </ul>
+            </li>
+            <li role="menuitem"><a href="#!">Joueurs</a></li>
+            <li role="menuitem"><a href="#!">Palmarès</a></li>
+          </ul>
+        </section>
+        <section class="comp-section" id="comp-pagination">
+          <h2 class="fw-bolder mb-4">Pagination</h2>
+          <nav>
+            <ul class="pagination-custom">
+              <li><a href="#!">«</a></li>
+              <li><a href="#!">1</a></li>
+              <li><span class="current">2</span></li>
+              <li><a href="#!">3</a></li>
+              <li><a href="#!">4</a></li>
+              <li><a href="#!">»</a></li>
+            </ul>
+          </nav>
+        </section>
+
+        <section class="comp-section" id="comp-carousel">
+          <h2 class="fw-bolder mb-2">Galerie photos — gestes multipoints</h2>
+          <p class="text-muted mb-3">
+            Faites glisser (swipe) la galerie vers la gauche ou la droite pour naviguer entre les photos des matchs.
+          </p>
+          <div class="carousel-swipe-wrap" id="swipe-carousel" aria-label="Galerie photos City Stars BC">
+            <div class="carousel-swipe-track" id="swipe-track">
+              <div class="carousel-swipe-slide">
+                <img src="assets/joueur-1.jpg" alt="Match contre Les Raptors — City Stars BC mène 78-65" />
+                <div class="carousel-swipe-caption">Victoire contre Les Raptors — 18 avril 2026</div>
+              </div>
+              <div class="carousel-swipe-slide">
+                <img src="assets/joueur-2.jpg" alt="Entraînement collectif au gymnase municipal" />
+                <div class="carousel-swipe-caption">Entraînement collectif — saison 2025-2026</div>
+              </div>
+              <div class="carousel-swipe-slide">
+                <img src="assets/joueur-3.jpg" alt="Podium du tournoi régional amateur 2025" />
+                <div class="carousel-swipe-caption">Tournoi régional — 2e place, 2025</div>
+              </div>
+              <div class="carousel-swipe-slide">
+                <img src="assets/capitaine.jpg" alt="Kelly Rowan, capitaine de l'équipe seniors" />
+                <div class="carousel-swipe-caption">Kelly Rowan — capitaine des Seniors</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="comp-section" id="comp-pointer-cancel">
+          <h2 class="fw-bolder mb-4">Annulation des actions de pointage</h2>
+
+          <div class="action-demo-grid">
+            <div class="action-demo-card bad">
+              <h3 class="h6 fw-bold mb-3 text-danger">
+                <i class="bi-x-circle me-1"></i> A. Action déclenchée à l'appui (mousedown)
+              </h3>
+              <p class="small text-muted mb-3">
+                Cliquez sur le bouton ci-dessous : l'action est déclenchée
+                <strong>dès que vous appuyez</strong>, sans possibilité d'annulation en relâchant la souris hors du
+                bouton.
+              </p>
+              <button class="btn btn-danger btn-sm w-100 mb-2" id="btn-mousedown" onmousedown="triggerDeleteDown()">
+                Supprimer le joueur de la liste
+              </button>
+              <div class="status-area text-danger fw-bold small" id="status-mousedown"></div>
+            </div>
+
+            <div class="action-demo-card good">
+              <h3 class="h6 fw-bold mb-3 text-success">
+                <i class="bi-check-circle me-1"></i> B. Action déclenchée au relâchement (click)
+              </h3>
+              <p class="small text-muted mb-3">
+                Cliquez sur le bouton ci-dessous : l'action n'est déclenchée qu'au <strong>relâchement</strong>. En
+                maintenant le bouton enfoncé et en déplaçant le curseur hors du bouton avant de relâcher, l'action est
+                annulée.
+              </p>
+              <button class="btn btn-success btn-sm w-100 mb-2" id="btn-click" onclick="triggerDeleteUp()">
+                Supprimer le joueur de la liste
+              </button>
+              <div class="status-area text-success fw-bold small" id="status-click"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="comp-section" id="comp-status">
+          <h2 class="fw-bolder mb-4">Messages de statut</h2>
+          <h3 class="h5 mb-3">A. Message non annoncé</h3>
+          <button
+            class="btn btn-outline-primary btn-sm"
+            onclick="document.getElementById('status-a').textContent = 'Joueur ajouté aux favoris.'"
+          >
+            Ajouter aux favoris
+          </button>
+          <div class="status-area text-success fw-bold" id="status-a"></div>
+          <h3 class="h5 mb-3 mt-4">B. Message caché mais présent</h3>
+          <div class="status-offscreen" aria-live="assertive" role="alert">
+            Bienvenue sur la page des composants. Chargement terminé.
+          </div>
+          <p class="text-muted small">Un message de statut est caché dans le DOM (inspectez le code source).</p>
+          <h3 class="h5 mb-3 mt-4">C. Message trop verbeux</h3>
+          <p>Cliquez plusieurs fois sur le bouton :</p>
+          <button class="btn btn-outline-primary btn-sm" onclick="verboseStatus()">Mettre à jour</button>
+          <div class="status-area" id="status-c" aria-live="assertive"></div>
+          <h3 class="h5 mb-3 mt-4">D. Message non pertinent</h3>
+          <button
+            class="btn btn-outline-primary btn-sm"
+            onclick="document.getElementById('status-d').textContent = 'Action effectuée avec succès.'"
+          >
+            Valider la sélection
+          </button>
+          <div class="status-area" id="status-d" role="status"></div>
+          <h3 class="h5 mb-3 mt-4">E. Compteur non détecté</h3>
+          <div class="d-flex align-items-center gap-3">
+            <input
+              type="text"
+              class="form-control player-filter"
+              placeholder="Filtrer les joueurs…"
+              oninput="updateCounter(this.value)"
+            />
+            <span id="result-counter" class="text-muted">5 résultats</span>
+          </div>
+        </section>
+        <section class="comp-section" id="comp-context">
+          <h2 class="fw-bolder mb-4">Changement de contexte</h2>
+          <h3 class="h5 mb-3">A. Recherche dynamique</h3>
+          <label for="search-dynamic" class="form-label">Rechercher un événement :</label>
+          <input
+            type="text"
+            class="form-control mb-2 dynamic-search"
+            id="search-dynamic"
+            placeholder="Tapez un mot-clé…"
+            oninput="dynamicSearch(this.value)"
+          />
+          <div id="dynamic-results">
+            <ul>
+              <li>Tournoi régional amateur 2023</li>
+              <li>Finale féminine 2023</li>
+              <li>Tournoi U14 départemental</li>
+              <li>Journée portes ouvertes</li>
+            </ul>
+          </div>
+          <h3 class="h5 mb-3 mt-4">B. Filtrage automatique par sélection</h3>
+          <fieldset class="mb-2">
+            <legend class="h6">Catégorie d'âge :</legend>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="age-filter"
+                id="filter-all"
+                value="all"
+                checked
+                onchange="filterByAge(this.value)"
+              />
+              <label class="form-check-label" for="filter-all">Toutes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="age-filter"
+                id="filter-senior"
+                value="senior"
+                onchange="filterByAge(this.value)"
+              />
+              <label class="form-check-label" for="filter-senior">Seniors</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="age-filter"
+                id="filter-u18"
+                value="u18"
+                onchange="filterByAge(this.value)"
+              />
+              <label class="form-check-label" for="filter-u18">U18</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="age-filter"
+                id="filter-u14"
+                value="u14"
+                onchange="filterByAge(this.value)"
+              />
+              <label class="form-check-label" for="filter-u14">U14</label>
+            </div>
+          </fieldset>
+          <div id="filtered-content">
+            <div class="card p-2 mb-1 filter-item" data-cat="senior">Kelly Rowan — Seniors</div>
+            <div class="card p-2 mb-1 filter-item" data-cat="senior">Marco Silva — Seniors</div>
+            <div class="card p-2 mb-1 filter-item" data-cat="u18">Amir Khan — U18</div>
+            <div class="card p-2 mb-1 filter-item" data-cat="u14">Léa Dupont — U14</div>
+            <div class="card p-2 mb-1 filter-item" data-cat="u14">Youssef Benamar — U14</div>
+          </div>
+          <h3 class="h5 mb-3 mt-4">C. Suggestion automatique intrusive</h3>
+          <p>Faites défiler la page ou attendez quelques secondes…</p>
+        </section>
+      </div>
+    </main>
+  </page-content>
+  <page-scripts>
+    <script>
+      /* ── Tab panel ─────────────────────────────────────────────── */
+      function switchTab(btn, panelId) {
+        document.querySelectorAll('.tab-btn').forEach((b) => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content-panel').forEach((p) => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(panelId).classList.add('active');
+      }
+
+      /* ── Faux select ───────────────────────────────────────────── */
+      function selectOption(el) {
+        var display = el.parentElement.previousElementSibling;
+        display.textContent = el.textContent;
+        el.parentElement.classList.remove('open');
+      }
+
+      /* ── Autocomplétion ────────────────────────────────────────── */
+      var players = [
+        'Kelly Rowan',
+        'Josiah Barclay',
+        'Evelyn Martinez',
+        'Marco Silva',
+        'Amir Khan',
+        'Léa Dupont',
+        'Youssef Benamar',
+        'Sophie Marchal',
+      ];
+      function showSuggestions(val) {
+        var box = document.getElementById('ac-suggestions');
+        box.innerHTML = '';
+        if (val.length < 1) {
+          box.classList.remove('open');
+          return;
+        }
+        var matches = players.filter(function (p) {
+          return p.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+        });
+        if (matches.length === 0) {
+          box.classList.remove('open');
+          return;
+        }
+        matches.forEach(function (m) {
+          var d = document.createElement('div');
+          d.textContent = m;
+          d.onclick = function () {
+            document.getElementById('player-search').value = m;
+            box.classList.remove('open');
+          };
+          box.appendChild(d);
+        });
+        box.classList.add('open');
+      }
+
+      /* ── Radio custom ──────────────────────────────────────────── */
+      function pickRadio(el) {
+        el.parentElement.querySelectorAll('.custom-radio .indicator').forEach(function (i) {
+          i.classList.remove('checked');
+        });
+        el.querySelector('.indicator').classList.add('checked');
+      }
+
+      /* ── Checkbox custom ───────────────────────────────────────── */
+      function toggleCheck(el) {
+        var ind = el.querySelector('.indicator');
+        var isChecked = ind.classList.toggle('checked');
+        if (isChecked) {
+          ind.textContent = '✓';
+        } else {
+          ind.textContent = '';
+        }
+      }
+
+      /* ── Toggle group ──────────────────────────────────────────── */
+      function toggleGroupSelect(btn) {
+        btn.parentElement.querySelectorAll('.toggle-group-btn').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+      }
+
+      /* ── Messages de statut — verbose ──────────────────────────── */
+      var verboseCount = 0;
+      function verboseStatus() {
+        verboseCount++;
+        document.getElementById('status-c').textContent =
+          'Mise à jour #' +
+          verboseCount +
+          ' effectuée à ' +
+          new Date().toLocaleTimeString() +
+          '. Le système a vérifié 47 éléments, traité 12 modifications, et synchronisé les données avec le serveur principal.';
+      }
+
+      /* ── Messages de statut — compteur ─────────────────────────── */
+      function updateCounter(val) {
+        var total = 5;
+        if (val.length > 0) {
+          total = Math.max(0, 5 - val.length);
+        }
+        document.getElementById('result-counter').textContent = total + ' résultat' + (total > 1 ? 's' : '');
+      }
+
+      /* ── Changement de contexte — recherche dynamique ──────────── */
+      var events = [
+        'Tournoi régional amateur 2023',
+        'Finale féminine 2023',
+        'Tournoi U14 départemental',
+        'Journée portes ouvertes',
+      ];
+      function dynamicSearch(val) {
+        var container = document.getElementById('dynamic-results');
+        if (val.length === 0) {
+          container.innerHTML =
+            '<ul>' +
+            events
+              .map(function (e) {
+                return '<li>' + e + '</li>';
+              })
+              .join('') +
+            '</ul>';
+          return;
+        }
+        var filtered = events.filter(function (e) {
+          return e.toLowerCase().indexOf(val.toLowerCase()) >= 0;
+        });
+        container.innerHTML =
+          filtered.length > 0
+            ? '<ul>' +
+              filtered
+                .map(function (e) {
+                  return '<li>' + e + '</li>';
+                })
+                .join('') +
+              '</ul>'
+            : '<p class="text-muted">Aucun résultat.</p>';
+      }
+
+      /* ── Changement de contexte — filtrage radio ───────────────── */
+      function filterByAge(val) {
+        document.querySelectorAll('.filter-item').forEach(function (el) {
+          if (val === 'all' || el.dataset.cat === val) {
+            el.style.display = '';
+          } else {
+            el.style.display = 'none';
+          }
+        });
+      }
+
+      /* ── Carrousel swipe-only — 13.10 ──────────────────────────── */
+      (function () {
+        var track = document.getElementById('swipe-track');
+        var wrap = document.getElementById('swipe-carousel');
+        if (!track || !wrap) return;
+        var slides = track.querySelectorAll('.carousel-swipe-slide');
+        var current = 0;
+        var startX = 0;
+        var isDragging = false;
+
+        function goTo(index) {
+          current = Math.max(0, Math.min(index, slides.length - 1));
+          track.style.transform = 'translateX(-' + current * 100 + '%)';
+        }
+
+        /* Touch events */
+        wrap.addEventListener(
+          'touchstart',
+          function (e) {
+            startX = e.touches[0].clientX;
+          },
+          { passive: true },
+        );
+        wrap.addEventListener('touchend', function (e) {
+          var diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+        });
+
+        /* Mouse drag */
+        wrap.addEventListener('mousedown', function (e) {
+          startX = e.clientX;
+          isDragging = true;
+          e.preventDefault();
+        });
+        document.addEventListener('mouseup', function (e) {
+          if (!isDragging) return;
+          isDragging = false;
+          var diff = startX - e.clientX;
+          if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+        });
+      })();
+
+      /* ── Pointer-down / click — 13.11 ───────────────────────────── */
+      function triggerDeleteDown() {
+        document.getElementById('status-mousedown').textContent =
+          "Action déclenchée à l'appui — impossible d'annuler !";
+      }
+      function triggerDeleteUp() {
+        document.getElementById('status-click').textContent =
+          'Action déclenchée au relâchement — vous pouviez glisser hors du bouton pour annuler.';
+      }
+
+      /* ── Changement de contexte — modale intrusive ─────────────── */
+      setTimeout(function () {
+        var existing = document.getElementById('intrusive-modal');
+        if (existing) return;
+        var modal = document.createElement('div');
+        modal.id = 'intrusive-modal';
+        modal.style.cssText =
+          'position:fixed;bottom:20px;right:20px;background:#fff;border:1px solid #dee2e6;border-radius:8px;padding:20px;z-index:2000;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:320px;';
+        modal.innerHTML =
+          '<p class="fw-bold mb-2">📢 Suggestion</p>' +
+          '<p class="small mb-2">Saviez-vous que nos séances découverte sont gratuites ? Inscrivez-vous maintenant !</p>' +
+          '<button class="btn btn-sm btn-primary" onclick="this.parentElement.remove()">Fermer</button>';
+        document.body.appendChild(modal);
+      }, 5000);
+    </script>
+  </page-scripts>
+</city-stars-page>

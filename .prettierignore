@@ -1,0 +1,7 @@
+dist/
+src/layouts/page.html
+node_modules/
+src/public/assets/
+docs/
+.idea/
+Corrigé des exercices.docx

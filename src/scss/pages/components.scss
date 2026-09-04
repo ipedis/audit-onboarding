@@ -1,0 +1,573 @@
+/* ==========================================================
+   STYLES TECHNIQUES
+   ========================================================== */
+
+/* ==========================================================
+   FIXTURES PÉDAGOGIQUES — NE PAS CORRIGER SANS CADRAGE
+   ========================================================== */
+
+/* ── Styles spécifiques aux composants d'exercice ───────────────── */
+
+.comp-section {
+  border-bottom: 1px solid #dee2e6;
+  padding: 2.5rem 0;
+}
+.comp-section:last-child {
+  border-bottom: none;
+}
+
+/* Accordéon custom (boutons en div) */
+.acc-header {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  cursor: pointer;
+  border: 1px solid #dee2e6;
+  margin-top: -1px;
+  font-weight: 600;
+}
+.acc-header:hover {
+  background: #e9ecef;
+}
+.acc-panel {
+  padding: 12px 16px;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  display: none;
+}
+.acc-panel.open {
+  display: block;
+}
+
+/* Barre de navigation secondaire */
+.nav-demo {
+  background: #343a40;
+  padding: 10px 0;
+}
+.nav-demo a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 14px;
+  display: inline-block;
+}
+.nav-demo a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.nav-demo .sub-menu {
+  display: none;
+  position: absolute;
+  background: #343a40;
+  min-width: 180px;
+  z-index: 10;
+}
+.nav-demo .has-sub:hover > .sub-menu {
+  display: block;
+}
+
+/* Fly-out menu */
+.flyout-wrap {
+  position: relative;
+  display: inline-block;
+}
+.flyout-trigger {
+  cursor: pointer;
+}
+.flyout-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  min-width: 220px;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.flyout-panel.show {
+  display: block;
+}
+.flyout-panel [role='menuitem'] {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #212529;
+}
+.flyout-panel [role='menuitem']:hover {
+  background: #f8f9fa;
+}
+
+/* Popover */
+.pop-trigger {
+  position: relative;
+  display: inline-block;
+}
+.pop-content {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #212529;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  min-width: 200px;
+  z-index: 10;
+  font-size: 0.875rem;
+}
+.pop-content::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #212529;
+}
+
+/* Tab panel */
+.tab-list {
+  display: flex;
+  border-bottom: 2px solid #dee2e6;
+  gap: 0;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  font-weight: 500;
+  color: #6c757d;
+}
+.tab-btn.active {
+  color: #0d6efd;
+  border-bottom-color: #0d6efd;
+}
+.tab-content-panel {
+  padding: 16px 0;
+  display: none;
+}
+.tab-content-panel.active {
+  display: block;
+}
+
+/* Faux select */
+.fake-select {
+  position: relative;
+  display: inline-block;
+  min-width: 220px;
+}
+.fake-select-display {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  background: #fff;
+}
+.fake-select-display::after {
+  content: '▾';
+  float: right;
+}
+.fake-select-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ced4da;
+  border-top: none;
+  background: #fff;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.fake-select-list.open {
+  display: block;
+}
+.fake-select-list div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.fake-select-list div:hover {
+  background: #e9ecef;
+}
+
+/* Autocomplete */
+.autocomplete-wrap {
+  position: relative;
+  display: inline-block;
+  min-width: 280px;
+}
+.autocomplete-suggestions {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ced4da;
+  border-top: none;
+  background: #fff;
+  z-index: 10;
+}
+.autocomplete-suggestions.open {
+  display: block;
+}
+.autocomplete-suggestions div {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.autocomplete-suggestions div:hover {
+  background: #e9ecef;
+}
+
+/* Burger menu mobile */
+.burger-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.burger-overlay.open {
+  display: block;
+}
+.burger-drawer {
+  position: fixed;
+  top: 0;
+  left: -280px;
+  width: 280px;
+  height: 100vh;
+  background: #fff;
+  z-index: 1000;
+  transition: left 0.3s;
+  padding: 20px;
+}
+.burger-drawer.open {
+  left: 0;
+}
+.burger-drawer a {
+  display: block;
+  padding: 10px 0;
+  color: #212529;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+}
+
+/* Fil d'Ariane */
+.breadcrumb-custom {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.breadcrumb-custom li::after {
+  content: '/';
+  margin-left: 8px;
+  color: #6c757d;
+}
+.breadcrumb-custom li:last-child::after {
+  content: '';
+}
+
+/* Radio/checkbox custom */
+.custom-radio,
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 0;
+}
+.custom-radio .indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #6c757d;
+  display: inline-block;
+}
+.custom-radio .indicator.checked {
+  border-color: #0d6efd;
+  background: radial-gradient(#0d6efd 40%, transparent 41%);
+}
+.custom-checkbox .indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 2px solid #6c757d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-checkbox .indicator.checked {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+  font-size: 12px;
+}
+
+/* Toggle */
+.toggle-track {
+  width: 48px;
+  height: 26px;
+  border-radius: 13px;
+  background: #ccc;
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.toggle-track.on {
+  background: #0d6efd;
+}
+.toggle-track .toggle-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.toggle-track.on .toggle-thumb {
+  left: 24px;
+}
+
+/* Toggle group */
+.toggle-group {
+  display: inline-flex;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.toggle-group-btn {
+  padding: 8px 18px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  border-right: 1px solid #dee2e6;
+}
+.toggle-group-btn:last-child {
+  border-right: none;
+}
+.toggle-group-btn.active {
+  background: #0d6efd;
+  color: #fff;
+}
+
+/* Tooltip */
+.tip-wrap {
+  position: relative;
+  display: inline-block;
+}
+.tip-bubble {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #212529;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── Carrousel swipe-only (13.10) ────────────────────────────── */
+.carousel-swipe-wrap {
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  user-select: none;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.carousel-swipe-wrap:active {
+  cursor: grabbing;
+}
+.carousel-swipe-track {
+  display: flex;
+  transition: transform 0.35s ease;
+}
+.carousel-swipe-slide {
+  min-width: 100%;
+  position: relative;
+}
+.carousel-swipe-slide img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+.carousel-swipe-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.9rem;
+}
+/* Aucun bouton précédent/suivant — violation 13.10 */
+
+/* ── Bouton pointer-down (13.11) ─────────────────────────────── */
+.action-demo-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.action-demo-card {
+  flex: 1;
+  min-width: 240px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.action-demo-card.bad {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+.action-demo-card.good {
+  border-color: #198754;
+  background: #f0fff4;
+}
+.drop-zone {
+  border: 2px dashed #adb5bd;
+  border-radius: 6px;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.drop-zone.over {
+  background: #e9ecef;
+  border-color: #0d6efd;
+}
+
+/* Menubar */
+.menubar-demo {
+  display: flex;
+  background: #495057;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+.menubar-demo > li {
+  position: relative;
+}
+.menubar-demo > li > a {
+  display: block;
+  padding: 10px 18px;
+  color: #fff;
+  text-decoration: none;
+}
+.menubar-demo > li > a:hover {
+  background: #6c757d;
+}
+.menubar-demo .submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #495057;
+  list-style: none;
+  padding: 0;
+  min-width: 200px;
+}
+.menubar-demo > li:hover .submenu {
+  display: block;
+}
+.menubar-demo .submenu a {
+  display: block;
+  padding: 8px 18px;
+  color: #fff;
+  text-decoration: none;
+}
+.menubar-demo .submenu a:hover {
+  background: #6c757d;
+}
+
+/* Pagination */
+.pagination-custom {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+}
+.pagination-custom a,
+.pagination-custom span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #212529;
+}
+.pagination-custom .current {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
+}
+
+/* Status messages area */
+.status-area {
+  min-height: 24px;
+  padding: 4px 0;
+  font-size: 0.9rem;
+}
+
+.component-has-sub {
+  position: relative;
+}
+
+.nav-demo-muted {
+  background: #6c757d;
+}
+
+.component-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.component-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  z-index: 1050;
+  min-width: 380px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.status-offscreen {
+  position: absolute;
+  left: -9999px;
+}
+
+.player-filter {
+  max-width: 200px;
+}
+
+.dynamic-search {
+  max-width: 300px;
+}

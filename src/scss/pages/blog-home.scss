@@ -1,0 +1,60 @@
+/* ==========================================================
+   STYLES TECHNIQUES
+   ========================================================== */
+
+.bg-featured-blog {
+  background-image: url('https://dummyimage.com/700x350/343a40/6c757d');
+}
+
+.blog-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+}
+
+.blog-newsletter-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  z-index: 1050;
+  padding: 2rem;
+  width: 420px;
+  max-width: 90vw;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+/* ==========================================================
+   FIXTURES PÉDAGOGIQUES — NE PAS CORRIGER SANS CADRAGE
+   ========================================================== */
+
+.has-tooltip {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+
+  .tooltip-content {
+    display: none;
+    position: absolute;
+    bottom: 130%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #212529;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+  }
+
+  &:hover .tooltip-content {
+    display: block;
+  }
+}

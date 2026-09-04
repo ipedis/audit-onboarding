@@ -1,0 +1,30 @@
+/* ==========================================================
+   STYLES TECHNIQUES
+   ========================================================== */
+
+/* ==========================================================
+   FIXTURES PÉDAGOGIQUES — NE PAS CORRIGER SANS CADRAGE
+   ========================================================== */
+
+.joueur-wrap {
+  position: relative;
+  display: inline-block;
+}
+.joueur-fiche {
+  display: none;
+  position: absolute;
+  top: -10px;
+  left: 100%;
+  margin-left: 12px;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 200px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  white-space: nowrap;
+}
+.joueur-wrap:hover .joueur-fiche {
+  display: block;
+}

@@ -1,0 +1,21 @@
+/* ==========================================================
+   STYLES TECHNIQUES
+   ========================================================== */
+
+.form-floating > .contact-message {
+  height: 10rem;
+}
+
+/* ==========================================================
+   FIXTURES PÉDAGOGIQUES — NE PAS CORRIGER SANS CADRAGE
+   ========================================================== */
+
+.champ-obligatoire::before {
+  content: 'Champ obligatoire – ';
+  font-weight: bold;
+  color: #c00;
+}
+
+.form-error-hidden {
+  display: none;
+}
