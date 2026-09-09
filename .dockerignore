@@ -1,0 +1,16 @@
+.git
+.github
+.idea
+.vscode
+.yarn
+dist
+docs
+node_modules
+
+.DS_Store
+*.log
+*.md
+
+AGENTS.md
+LICENSE
+
