@@ -115,7 +115,10 @@ Les contrôles statiques vérifient notamment :
 
 ## Déploiement
 
-Aucun déploiement automatisé n’est configuré pour le moment. Le contenu de `dist/` est autonome et peut être servi par un serveur web statique; la cible d’hébergement et son intégration seront définies séparément.
+Le site est déployé sur deux environnements :
+
+- [staging](https://staging-audit-onboarding.e-accessibility.info);
+- [production](https://audit-onboarding.e-accessibility.info).
 
 ## Licence
 
