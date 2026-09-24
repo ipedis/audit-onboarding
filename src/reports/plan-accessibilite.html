@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan d'accessibilite City Stars BC</title>
+  <style>
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #000000;
+      --color-border: #cccccc;
+      --color-critical: #d32f2f;
+      --color-important: #f57c00;
+      --color-recommended: #388e3c;
+      --color-bg-critical: #ffebee;
+      --color-bg-important: #fff3e0;
+      --color-bg-recommended: #e8f5e9;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --color-bg: #1e1e1e;
+        --color-text: #e0e0e0;
+        --color-border: #444444;
+        --color-bg-critical: #4a1a1a;
+        --color-bg-important: #4a3015;
+        --color-bg-recommended: #1a3a1a;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --color-bg: #1e1e1e;
+      --color-text: #e0e0e0;
+      --color-border: #444444;
+      --color-bg-critical: #4a1a1a;
+      --color-bg-important: #4a3015;
+      --color-bg-recommended: #1a3a1a;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.6;
+      color: var(--color-text);
+      background: var(--color-bg);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      border-bottom: 3px solid var(--color-border);
+      padding-bottom: 10px;
+    }
+
+    .notice {
+      background: var(--color-bg-important);
+      border-left: 4px solid var(--color-important);
+      padding: 15px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .critical h2 {
+      background: var(--color-bg-critical);
+      color: var(--color-critical);
+      border-left: 4px solid var(--color-critical);
+    }
+
+    .important h2 {
+      background: var(--color-bg-important);
+      color: var(--color-important);
+      border-left: 4px solid var(--color-important);
+    }
+
+    .recommended h2 {
+      background: var(--color-bg-recommended);
+      color: var(--color-recommended);
+      border-left: 4px solid var(--color-recommended);
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .file-block {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .file-name {
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+      color: #0066cc;
+      margin-bottom: 10px;
+      font-size: 0.95em;
+    }
+
+    .changes-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 10px 0;
+    }
+
+    .changes-list li {
+      padding: 8px 0 8px 24px;
+      position: relative;
+    }
+
+    .changes-list li:before {
+      content: "- ";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .theme-tag {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      background: var(--color-border);
+    }
+
+    .critical-section {
+      border-top: 5px solid var(--color-critical);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .important-section {
+      border-top: 5px solid var(--color-important);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    .recommended-section {
+      border-top: 5px solid var(--color-recommended);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+
+    code {
+      background: var(--color-border);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+
+    .criteria {
+      font-size: 0.85em;
+      color: #666;
+      margin-top: 5px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Plan de correction d'accessibilite - Site City Stars BC</h1>
+
+    <div class="notice">
+      <strong>IMPORTANT - Contexte pedagogique</strong>
+      <p>
+        Ce site est un outil d'exercices d'accessibilite (RGAA 4.1.2). Les problemes listes
+        constituent les scenarios pedagogiques intentionnels que les participants doivent
+        identifier et corriger. Avant d'appliquer ce plan, verifier l'intention pedagogique
+        aupres du pilote du projet.
+      </p>
+    </div>
+
+    <!-- PRIORITE CRITIQUE -->
+    <div class="critical-section critical">
+      <h2>Priorite CRITIQUE - Impact fonctionnel</h2>
+      <p>Problemes bloquant l'acces ou la comprehension du contenu pour utilisateurs en situation de handicap.</p>
+
+      <div class="section">
+        <h3>THEME 11 : Formulaires - Etiquettes manquantes</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/contact.html</div>
+          <div class="theme-tag">11.1, 11.9, 11.10, 11.13</div>
+          <ul class="changes-list">
+            <li>Champ "Ville" : ajouter <code>&lt;label for="city"&gt;Ville&lt;/label&gt;</code></li>
+            <li>Champ "Sujet" : ajouter <code>&lt;label for="subject"&gt;Sujet&lt;/label&gt;</code></li>
+            <li>Bouton ">>" : remplacer par intitule explicite (ex: "Envoyer le message")</li>
+            <li>Erreurs de validation : ajouter attributs <code>aria-describedby</code> reliant champ a message d'erreur</li>
+            <li>Corriger <code>autocomplete</code> : email au lieu de "username", utiliser "tel" pour telephone au lieu de "postal-code"</li>
+            <li>Annoncer les erreurs au lecteur d'ecran avec <code>role="alert"</code></li>
+          </ul>
+          <div class="criteria">RGAA 11.1 (etiquettes), 11.9 (intitule), 11.10 (erreurs), 11.13 (autocompletion)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/inscription.html</div>
+          <div class="theme-tag">11.5, 11.6</div>
+          <ul class="changes-list">
+            <li>Radios "Niveau" : regrouper dans <code>&lt;fieldset&gt;&lt;legend&gt;Niveau&lt;/legend&gt;...&lt;/fieldset&gt;</code></li>
+            <li>Group "Disponibilites" : remplacer <code>&lt;legend&gt;&lt;/legend&gt;</code> vide par intitule significatif</li>
+            <li>Widget date : corriger les pieges clavier (interceptage des touches de sortie)</li>
+          </ul>
+          <div class="criteria">RGAA 11.5 (regroupement), 11.6 (legende), 12.9 (piege clavier)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 13 : Consultation - Limites de temps</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/limite-temps.html</div>
+          <div class="theme-tag">13.1</div>
+          <ul class="changes-list">
+            <li>Quiz 120s : ajouter mecanisme de prolongation ou desactivation</li>
+            <li>Afficher avertissement visible avant expiration</li>
+            <li>Permettre interruption sans perte de donnees deja saisies</li>
+          </ul>
+          <div class="criteria">RGAA 13.1 (limite de temps)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/refresh-auto.html</div>
+          <div class="theme-tag">13.1</div>
+          <ul class="changes-list">
+            <li>Rafraichissement auto 30s : desactiver ou permettre reglage par utilisateur</li>
+            <li>Avertissement visible 5s avant actualisation</li>
+          </ul>
+          <div class="criteria">RGAA 13.1 (limite de temps)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 8 : Elements obligatoires</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html</div>
+          <div class="theme-tag">8.1</div>
+          <ul class="changes-list">
+            <li>Ajouter doctype en debut de fichier : <code>&lt;!DOCTYPE html&gt;</code></li>
+          </ul>
+          <div class="criteria">RGAA 8.1 (doctype)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">8.3, 8.6</div>
+          <ul class="changes-list">
+            <li>Ajouter <code>lang="fr"</code> sur balise <code>&lt;html&gt;</code></li>
+            <li>Changer titre de "New page" a "City Stars BC - Accueil" (ou equivalent pertinent)</li>
+          </ul>
+          <div class="criteria">RGAA 8.3 (langue), 8.6 (titre)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/pricing.html</div>
+          <div class="theme-tag">8.4</div>
+          <ul class="changes-list">
+            <li>Remplacer <code>lang="de"</code> par <code>lang="fr"</code></li>
+          </ul>
+          <div class="criteria">RGAA 8.4 (langue)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/contact.html</div>
+          <div class="theme-tag">8.5</div>
+          <ul class="changes-list">
+            <li>Remplir <code>&lt;title&gt;</code> avec contenu pertinent (ex: "City Stars BC - Contact")</li>
+          </ul>
+          <div class="criteria">RGAA 8.5 (titre non vide)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIORITE IMPORTANTE -->
+    <div class="important-section important">
+      <h2>Priorite IMPORTANTE - Conformite RGAA</h2>
+      <p>Problemes affectant la comprehension, navigation ou utilisation.</p>
+
+      <div class="section">
+        <h3>THEME 1 : Images</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html et src/blog-home.html</div>
+          <div class="theme-tag">1.1, 1.3</div>
+          <ul class="changes-list">
+            <li>Verifier alternatives insuffisantes pour images fonctionnelles</li>
+            <li>Ajouter descriptions contextuelles pour images complexes</li>
+          </ul>
+          <div class="criteria">RGAA 1.1 (alternatives), 1.3 (images complexes)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">1.3, 1.6</div>
+          <ul class="changes-list">
+            <li>Infographie "Stats Kelly Rowan" : alternative courte insuffisante</li>
+            <li>Ajouter description detaillee adjacente ou reliee (data-table, transcription texte)</li>
+          </ul>
+          <div class="criteria">RGAA 1.3 (images complexes), 1.6 (description detaillee)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 2 : Cadres (iframes)</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">2.1, 2.2</div>
+          <ul class="changes-list">
+            <li>Premier iframe : ajouter attribut <code>title</code> pertinent (ex: "Video presentation")</li>
+            <li>Deuxieme iframe : remplacer titre generique par titre specifique identifiant le contenu</li>
+          </ul>
+          <div class="criteria">RGAA 2.1 (titre present), 2.2 (titre pertinent)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 9 : Structuration de l'information</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html</div>
+          <div class="theme-tag">9.1</div>
+          <ul class="changes-list">
+            <li>Corriger saut de niveau h2 -> h4 (utiliser h3 intermediaire)</li>
+            <li>Remplacer h3 vide par intitule significatif</li>
+          </ul>
+          <div class="criteria">RGAA 9.1 (hierarchie, titres pertinents)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/blog-home.html</div>
+          <div class="theme-tag">9.1</div>
+          <ul class="changes-list">
+            <li>Remplacer h3 decoratif/vide par contenu pertinent ou supprimer si non-structural</li>
+          </ul>
+          <div class="criteria">RGAA 9.1 (titres pertinents)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/portfolio-overview.html</div>
+          <div class="theme-tag">9.2</div>
+          <ul class="changes-list">
+            <li>Structures simulees avec <code>div</code> : utiliser elements semantiques (<code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>)</li>
+          </ul>
+          <div class="criteria">RGAA 9.2 (elements structurants)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/blog-post.html</div>
+          <div class="theme-tag">9.3, 9.4</div>
+          <ul class="changes-list">
+            <li>Listes simulees : remplacer paragraphes prefixes par <code>&lt;ul&gt;&lt;li&gt;</code> ou <code>&lt;ol&gt;&lt;li&gt;</code></li>
+            <li>Citations seulement stylees : utiliser <code>&lt;blockquote&gt;</code> ou <code>&lt;q&gt;</code></li>
+          </ul>
+          <div class="criteria">RGAA 9.3 (listes), 9.4 (citations)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html</div>
+          <div class="theme-tag">9.4</div>
+          <ul class="changes-list">
+            <li>Citations simulees : remplacer styles par <code>&lt;blockquote&gt;</code></li>
+          </ul>
+          <div class="criteria">RGAA 9.4 (citations)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 12 : Navigation et clavier</h3>
+
+        <div class="file-block">
+          <div class="file-name">Toutes les pages</div>
+          <div class="theme-tag">12.7</div>
+          <ul class="changes-list">
+            <li>Skip link : remplacer <code>display:none</code> par <code>position:absolute;left:-9999px</code> ou accessible au focus</li>
+            <li>Rendre focusable et visible au focus au clavier</li>
+          </ul>
+          <div class="criteria">RGAA 12.7 (lien d'evitement)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html</div>
+          <div class="theme-tag">12.8</div>
+          <ul class="changes-list">
+            <li>Supprimer <code>tabindex</code> positifs qui perturbent l'ordre de navigation</li>
+          </ul>
+          <div class="criteria">RGAA 12.8 (ordre de focus)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/faq.html</div>
+          <div class="theme-tag">12.2</div>
+          <ul class="changes-list">
+            <li>Deplacer menu avant le contenu principal (ordre DOM)</li>
+          </ul>
+          <div class="criteria">RGAA 12.2 (acces menu)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/blog-home.html</div>
+          <div class="theme-tag">12.8</div>
+          <ul class="changes-list">
+            <li>Modale : verifier qu'elle ne perturbe pas l'ordre du focus</li>
+            <li>Implementer piege focus dans la modale (Tab dans modale = reste dans modale)</li>
+          </ul>
+          <div class="criteria">RGAA 12.8 (ordre de focus)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/statistiques.html</div>
+          <div class="theme-tag">12.3, 12.4, 12.11</div>
+          <ul class="changes-list">
+            <li>Pied de page : fournir acces au sitemap/plan</li>
+            <li>Fiches joueurs : les rendre accessibles au clavier (pas seulement au survol)</li>
+            <li>Inclure article blog dans le sitemap (12.4)</li>
+          </ul>
+          <div class="criteria">RGAA 12.3 (acces plan), 12.4 (completude sitemap), 12.11 (acces clavier)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/sitemap.html</div>
+          <div class="theme-tag">12.4</div>
+          <ul class="changes-list">
+            <li>Ajouter l'article du blog manquant au sitemap</li>
+          </ul>
+          <div class="criteria">RGAA 12.4 (completude sitemap)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 4 : Multimedia et video</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">4.1, 4.2, 4.11</div>
+          <ul class="changes-list">
+            <li>Video <code>media.mp4</code> : ajouter element <code>&lt;video&gt;</code> avec commandes accessibles (play, pause, stop)</li>
+            <li>Ajouter transcription descriptive ou audiodescription equivalente</li>
+            <li>Supprimer autoplay non controle</li>
+          </ul>
+          <div class="criteria">RGAA 4.1 (transcription), 4.2 (audiodescription), 4.11 (commandes)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRIORITE RECOMMANDEE -->
+    <div class="recommended-section recommended">
+      <h2>Priorite RECOMMANDEE - Ameliorations et bonnes pratiques</h2>
+      <p>Problemes affectant la comprehension ou presentation, moins bloquants.</p>
+
+      <div class="section">
+        <h3>THEME 10 : Presentation de l'information</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/pricing.html</div>
+          <div class="theme-tag">10.1, 10.4</div>
+          <ul class="changes-list">
+            <li>Supprimer attributs de presentation sur tableau (cellpadding, cellspacing, border)</li>
+            <li>Badge "200%" : verifier lisibilite au zoom 200%</li>
+          </ul>
+          <div class="criteria">RGAA 10.1 (semantique CSS), 10.4 (zoom 200%)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/contact.html</div>
+          <div class="theme-tag">10.1</div>
+          <ul class="changes-list">
+            <li>Element de centrage : remplacer par CSS (text-align ou flexbox)</li>
+          </ul>
+          <div class="criteria">RGAA 10.1 (semantique)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/about.html</div>
+          <div class="theme-tag">10.3</div>
+          <ul class="changes-list">
+            <li>Etapes sans ordre logique : ajouter numeotation CSS ou utiliser <code>&lt;ol&gt;</code> si ordre significatif</li>
+          </ul>
+          <div class="criteria">RGAA 10.3 (presentation ordre)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">10.8, 10.11</div>
+          <ul class="changes-list">
+            <li>Contenus visibles : retirer <code>aria-hidden="true"</code> qui masque le contenu des lecteurs d'ecran</li>
+            <li>Largeur min 320px : verifier responsive design et adaptation mobile</li>
+          </ul>
+          <div class="criteria">RGAA 10.8 (aria-hidden), 10.11 (responsive)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/faq.html</div>
+          <div class="theme-tag">10.8</div>
+          <ul class="changes-list">
+            <li>Panneau ouvert : retirer <code>aria-hidden</code> si contenu visible</li>
+          </ul>
+          <div class="criteria">RGAA 10.8 (aria-hidden coherent)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/blog-home.html</div>
+          <div class="theme-tag">10.13, 10.14</div>
+          <ul class="changes-list">
+            <li>Infobulles sociales : les rendre persistantes au focus/keyboard et accessibles</li>
+          </ul>
+          <div class="criteria">RGAA 10.13 (infobulles persistantes), 10.14 (acces clavier)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/blog-post.html</div>
+          <div class="theme-tag">10.6</div>
+          <ul class="changes-list">
+            <li>Liens couleur seule : ajouter indication visuelle au survol/focus (underline, bold) en plus de couleur</li>
+          </ul>
+          <div class="criteria">RGAA 10.6 (distinction liens)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 6 : Liens - Contexte et intitules</h3>
+
+        <div class="file-block">
+          <div class="file_name">src/blog-home.html</div>
+          <div class="theme-tag">6.2</div>
+          <ul class="changes-list">
+            <li>Liens-icones reseaux sociaux : ajouter intitule accessible (<code>aria-label</code> ou <code>&lt;span&gt;</code> texte)</li>
+          </ul>
+          <div class="criteria">RGAA 6.2 (intitule accessible)</div>
+        </div>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">6.1</div>
+          <ul class="changes-list">
+            <li>Liens generiques ou symboliques : ajouter contexte ou intitule explicite si contenu seul insuffisant</li>
+          </ul>
+          <div class="criteria">RGAA 6.1 (destination claire)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 3 : Couleurs et contraste</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/index.html</div>
+          <div class="theme-tag">3.2</div>
+          <ul class="changes-list">
+            <li>Texte secondaire translucide sur fond bleu : verifier comme texte (3.2), non comme composant (3.3)</li>
+            <li>Mesurer et corriger contraste si < 4.5:1 (texte normal)</li>
+          </ul>
+          <div class="criteria">RGAA 3.2 (contraste texte)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>THEME 5 : Tableaux - En-tetes et structure</h3>
+
+        <div class="file-block">
+          <div class="file-name">src/statistiques.html</div>
+          <div class="theme-tag">5.6, 5.7</div>
+          <ul class="changes-list">
+            <li>Premier tableau : remplacer <code>&lt;td&gt;</code> par <code>&lt;th&gt;</code> pour l'en-tete</li>
+            <li>Tableau "Prochains matchs" : ajouter <code>scope</code> sur les <code>&lt;th&gt;</code> existants</li>
+          </ul>
+          <div class="criteria">RGAA 5.6 (en-tete), 5.7 (scope)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECAPITULATIF PAR FICHIER -->
+    <div style="margin-top: 40px; border-top: 3px solid var(--color-border); padding-top: 30px;">
+      <h2 style="color: var(--color-text);">Recapitulatif par fichier - Ordre de correction recommande</h2>
+
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="background: var(--color-border);">
+            <th style="padding: 10px; text-align: left; border: 1px solid var(--color-border);">Fichier</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid var(--color-border);">Priorite</th>
+            <th style="padding: 10px; text-align: left; border: 1px solid var(--color-border);">Themes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/contact.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-critical); font-weight: bold;">CRITIQUE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">8, 11</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/index.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-critical); font-weight: bold;">CRITIQUE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">8, 4, 10</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/inscription.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-critical); font-weight: bold;">CRITIQUE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">11, 12</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/limite-temps.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-critical); font-weight: bold;">CRITIQUE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">13</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/about.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">8, 9, 10, 12</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/pricing.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">8, 10, 5</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/blog-post.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">9, 10</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/blog-home.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">1, 9, 12, 10, 6</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/faq.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">12, 10</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/statistiques.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">5, 12</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/refresh-auto.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-critical); font-weight: bold;">CRITIQUE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">13</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/portfolio-overview.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">9</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><code>src/sitemap.html</code></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">12</td>
+          </tr>
+          <tr>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">Toutes pages</td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);"><span style="color: var(--color-important); font-weight: bold;">IMPORTANTE</span></td>
+            <td style="padding: 10px; border: 1px solid var(--color-border);">12 (skip link)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

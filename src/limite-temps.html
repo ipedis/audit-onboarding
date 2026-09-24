@@ -28,7 +28,10 @@
                   <div class="timer-fill" id="timer-fill"></div>
                 </div>
 
-                <p class="text-muted small mb-0">Le quiz se ferme automatiquement à la fin du compte à rebours.</p>
+                <div class="mt-3">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" id="pause-resume-btn">Mettre en pause</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" id="disable-timer-btn">Desactiver le compte a rebours</button>
+                </div>
               </div>
             </div>
 
@@ -140,16 +143,18 @@
   </page-content>
   <page-scripts>
     <script>
-      /* ── Compte à rebours — 13.1 : aucun contrôle utilisateur ─────
-           L'utilisateur ne peut ni mettre en pause, ni prolonger, ni
-           désactiver ce délai. À l'expiration, le formulaire est bloqué.  */
       (function () {
-        var TOTAL = 120; // secondes
+        var TOTAL = 120;
         var remaining = TOTAL;
         var fill = document.getElementById('timer-fill');
         var text = document.getElementById('timer-text');
         var form = document.getElementById('quiz-form');
         var overlay = document.getElementById('expired-overlay');
+        var pauseBtn = document.getElementById('pause-resume-btn');
+        var disableBtn = document.getElementById('disable-timer-btn');
+        var isPaused = false;
+        var isDisabled = false;
+        var interval = null;
 
         function fmt(s) {
           var m = Math.floor(s / 60);
@@ -158,12 +163,13 @@
         }
 
         function tick() {
+          if (isDisabled || isPaused) return;
+
           remaining--;
           var pct = (remaining / TOTAL) * 100;
           fill.style.width = pct + '%';
           text.textContent = fmt(remaining);
 
-          // Couleurs d'alerte
           if (remaining <= 30) {
             fill.classList.add('danger');
             fill.classList.remove('warning');
@@ -176,7 +182,6 @@
 
           if (remaining <= 0) {
             clearInterval(interval);
-            // Désactiver tous les champs
             form.querySelectorAll('input, button').forEach(function (el) {
               el.disabled = true;
             });
@@ -184,7 +189,22 @@
           }
         }
 
-        var interval = setInterval(tick, 1000);
+        pauseBtn.addEventListener('click', function () {
+          if (isDisabled) return;
+          isPaused = !isPaused;
+          pauseBtn.textContent = isPaused ? 'Reprendre' : 'Mettre en pause';
+        });
+
+        disableBtn.addEventListener('click', function () {
+          isDisabled = true;
+          clearInterval(interval);
+          fill.style.display = 'none';
+          text.textContent = 'Desactif';
+          pauseBtn.disabled = true;
+          disableBtn.disabled = true;
+        });
+
+        interval = setInterval(tick, 1000);
       })();
     </script>
   </page-scripts>

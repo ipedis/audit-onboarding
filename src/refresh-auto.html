@@ -7,7 +7,6 @@
   footer="shared"
 >
   <page-head>
-    <meta http-equiv="refresh" content="30" />
   </page-head>
   <page-content>
     <main class="flex-shrink-0" id="contenu-principal">
@@ -25,9 +24,17 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="refresh-notice mb-4">
-              <i class="bi-arrow-clockwise me-2"></i>
-              Cette page se met à jour automatiquement toutes les 30 secondes pour afficher les derniers résultats. Mise
-              à jour dans <span class="countdown-badge" id="refresh-countdown">30</span> secondes.
+              <div class="d-flex align-items-center justify-content-between">
+                <div>
+                  <i class="bi-arrow-clockwise me-2"></i>
+                  Cette page se met a jour automatiquement toutes les 30 secondes pour afficher les derniers resultats. Mise
+                  a jour dans <span class="countdown-badge" id="refresh-countdown">30</span> secondes.
+                </div>
+                <div class="gap-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" id="toggle-auto-refresh">Arreter le rafraichissement auto</button>
+                  <button type="button" class="btn btn-sm btn-outline-primary" id="manual-refresh">Rafraichir maintenant</button>
+                </div>
+              </div>
             </div>
 
             <h2 class="h5 fw-bold mb-3">Match en cours</h2>
@@ -152,16 +159,50 @@
   </page-content>
   <page-scripts>
     <script>
-      /* Compteur visuel de rafraîchissement (cosmétique — le vrai refresh
-           est assuré par la balise <meta http-equiv="refresh">) */
       (function () {
         var count = 30;
         var el = document.getElementById('refresh-countdown');
-        setInterval(function () {
-          count--;
-          if (count < 0) count = 30;
-          el.textContent = count;
-        }, 1000);
+        var toggleBtn = document.getElementById('toggle-auto-refresh');
+        var manualBtn = document.getElementById('manual-refresh');
+        var isAutoRefreshEnabled = true;
+        var autoRefreshInterval = null;
+
+        function startAutoRefresh() {
+          count = 30;
+          autoRefreshInterval = setInterval(function () {
+            count--;
+            if (count <= 0) {
+              location.reload();
+              return;
+            }
+            el.textContent = count;
+          }, 1000);
+        }
+
+        function stopAutoRefresh() {
+          if (autoRefreshInterval) {
+            clearInterval(autoRefreshInterval);
+            autoRefreshInterval = null;
+          }
+          el.textContent = 'Arrete';
+        }
+
+        toggleBtn.addEventListener('click', function () {
+          isAutoRefreshEnabled = !isAutoRefreshEnabled;
+          if (isAutoRefreshEnabled) {
+            toggleBtn.textContent = 'Arreter le rafraichissement auto';
+            startAutoRefresh();
+          } else {
+            toggleBtn.textContent = 'Reprendre le rafraichissement auto';
+            stopAutoRefresh();
+          }
+        });
+
+        manualBtn.addEventListener('click', function () {
+          location.reload();
+        });
+
+        startAutoRefresh();
       })();
     </script>
   </page-scripts>

@@ -1,11 +1,11 @@
-<city-stars-page title="" lang="fr" doctype="html" body-class="d-flex flex-column" header="shared" footer="shared">
+<city-stars-page title="Contact — City Stars BC" lang="fr" doctype="html" body-class="d-flex flex-column" header="shared" footer="shared">
   <page-content>
     <main class="flex-shrink-0">
       <section class="py-5">
         <div class="container px-5">
           <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
             <div class="text-center mb-5">
-              <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
+              <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope" aria-hidden="true"></i></div>
               <center><h1 class="fw-bolder">Contactez-nous</h1></center>
               <p class="lead fw-normal text-muted mb-0">Nous serons ravis de vous répondre</p>
             </div>
@@ -28,7 +28,7 @@
                       id="email"
                       type="email"
                       placeholder="nom@exemple.com"
-                      autocomplete="username"
+                      autocomplete="email"
                     />
                     <label for="email">Adresse e-mail <span class="text-danger" aria-hidden="true">*</span></label>
                     <div id="err-email" class="text-danger small mt-1 form-error-hidden">
@@ -36,10 +36,11 @@
                     </div>
                   </div>
                   <div class="mb-3">
+                    <label for="ville">Votre ville de résidence</label>
                     <input class="form-control" id="ville" type="text" placeholder="Votre ville de résidence" />
                   </div>
                   <div class="mb-3">
-                    <p class="mb-1 fw-semibold">Sujet de votre message</p>
+                    <label for="sujet" class="mb-1 fw-semibold d-block">Sujet de votre message</label>
                     <input
                       class="form-control"
                       id="sujet"
@@ -52,7 +53,7 @@
                     <label for="champ-libre">Champ texte *</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input class="form-control" id="phone" type="tel" placeholder=" " autocomplete="postal-code" />
+                    <input class="form-control" id="phone" type="tel" placeholder=" " autocomplete="tel" />
                     <label for="phone" class="champ-obligatoire">Numéro de téléphone</label>
                     <div id="err-phone" class="text-danger small mt-1 form-error-hidden">
                       Format incorrect. Veuillez réessayer.
@@ -85,7 +86,7 @@
                     Votre message a bien été envoyé. Nous vous répondrons dans les meilleurs délais.
                   </div>
                   <div class="d-grid">
-                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">&gt;&gt;</button>
+                    <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Envoyer le message</button>
                   </div>
                 </form>
               </div>
@@ -95,26 +96,26 @@
           <div class="row gx-5 row-cols-2 row-cols-lg-4 py-5">
             <div class="col">
               <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                <i class="bi bi-chat-dots"></i>
+                <i class="bi bi-chat-dots" aria-hidden="true"></i>
               </div>
               <div class="h5 mb-2">Chat en direct</div>
               <p class="text-muted mb-0">Discutez en direct avec un membre de notre équipe.</p>
             </div>
             <div class="col">
-              <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-people"></i></div>
+              <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-people" aria-hidden="true"></i></div>
               <div class="h5">Rejoindre la communauté</div>
               <p class="text-muted mb-0">Participez à nos forums et échangez avec d'autres membres du club.</p>
             </div>
             <div class="col">
               <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                <i class="bi bi-question-circle"></i>
+                <i class="bi bi-question-circle" aria-hidden="true"></i>
               </div>
               <div class="h5">Centre d'aide</div>
               <p class="text-muted mb-0">Consultez notre FAQ et nos articles d'aide pour trouver des réponses.</p>
             </div>
             <div class="col">
               <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
-                <i class="bi bi-telephone"></i>
+                <i class="bi bi-telephone" aria-hidden="true"></i>
               </div>
               <div class="h5">Appelez-nous</div>
               <p class="text-muted mb-0">Disponibles du lundi au vendredi, de 9h à 18h au 01 23 45 67 89.</p>
