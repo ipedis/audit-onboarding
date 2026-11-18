@@ -13,11 +13,18 @@ COPY src/ ./src/
 
 RUN yarn vite build
 
-FROM nginxinc/nginx-unprivileged:1.30.4-alpine-slim AS runtime
+FROM nginx:1.31.9-alpine-slim AS runtime
 
 USER root
 
-RUN rm -rf /usr/share/nginx/html
+# Run the official image unprivileged: no "user" directive, pid and temp paths under /tmp,
+# and /etc/nginx + cache owned by uid 101 (same setup as nginxinc/nginx-unprivileged).
+RUN rm -rf /usr/share/nginx/html \
+    && sed -i '/user  nginx;/d' /etc/nginx/nginx.conf \
+    && sed -i 's,\(/var\)\{0\,1\}/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf \
+    && sed -i "/^http {/a \    proxy_temp_path /tmp/proxy_temp;\n    client_body_temp_path /tmp/client_temp;\n    fastcgi_temp_path /tmp/fastcgi_temp;\n    uwsgi_temp_path /tmp/uwsgi_temp;\n    scgi_temp_path /tmp/scgi_temp;\n" /etc/nginx/nginx.conf \
+    && chown -R 101:0 /var/cache/nginx /etc/nginx \
+    && chmod -R g+w /var/cache/nginx /etc/nginx
 
 COPY --chown=101:0 --chmod=664 docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/ /usr/share/nginx/html/
