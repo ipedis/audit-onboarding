@@ -70,5 +70,5 @@ jobs:
           errors: true
           payload: |
             {
-              "text": ":rocket: Audit Onboarding a été déployé en production : https://audit-onboarding.e-accessibility.info (${{ env.TAG }})"
+              "text": ":rocket: Audit Onboarding a été déployé en production : https://audit-onboarding.allydev.fr (${{ env.TAG }})"
             }

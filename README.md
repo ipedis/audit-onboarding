@@ -117,8 +117,8 @@ Les contrôles statiques vérifient notamment :
 
 Le site est déployé sur deux environnements :
 
-- [staging](https://staging-audit-onboarding.e-accessibility.info);
-- [production](https://audit-onboarding.e-accessibility.info).
+- [staging](https://staging-audit-onboarding.allydev.fr);
+- [production](https://audit-onboarding.allydev.fr).
 
 ## Licence
 

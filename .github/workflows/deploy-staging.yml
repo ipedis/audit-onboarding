@@ -67,5 +67,5 @@ jobs:
           errors: true
           payload: |
             {
-              "text": ":rocket: Audit Onboarding a été déployé en staging : https://staging-audit-onboarding.e-accessibility.info (${{ env.TAG }})"
+              "text": ":rocket: Audit Onboarding a été déployé en staging : https://staging-audit-onboarding.allydev.fr (${{ env.TAG }})"
             }
