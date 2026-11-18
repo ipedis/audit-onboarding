@@ -15,8 +15,8 @@ Le site exécuté depuis les sources Vite constitue la vérité de fonctionnemen
 
 ## Prérequis
 
-- Node.js 24 LTS;
-- Corepack activé pour utiliser Yarn 4.12.0, verrouillé par `package.json`.
+- Node.js 26;
+- Corepack installé (`npm install --global corepack`, il n’est plus fourni avec Node.js depuis la v25) et activé pour utiliser Yarn 4.12.0, verrouillé par `package.json`.
 
 La version Node attendue est aussi indiquée dans `.nvmrc`.
 

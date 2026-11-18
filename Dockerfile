@@ -1,11 +1,12 @@
 # syntax=docker/dockerfile:1.7
 
-FROM node:24-alpine AS builder
+FROM node:26-alpine AS builder
 
 WORKDIR /app
 
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN corepack enable && yarn install --immutable
+# Corepack is no longer bundled with Node.js since v25.
+RUN npm install --global corepack@0.36.0 && corepack enable && yarn install --immutable
 
 COPY vite.config.js ./
 COPY scripts/city-stars-layout.mjs ./scripts/city-stars-layout.mjs

@@ -17,7 +17,7 @@ Ces consignes s’appliquent à l’ensemble du dépôt. Le projet est un site m
 ## Architecture et dépendances
 
 - Ne pas ajouter de commentaire HTML (`<!-- ... -->`) dans les pages ou dans `src/layouts/partials/`.
-- Utiliser Node.js 24 LTS et Yarn 4 via Corepack. Versionner `package.json` et `yarn.lock`, mais jamais `node_modules/`, `.yarn/` ni `dist/`.
+- Utiliser Node.js 26 et Yarn 4 via Corepack (à installer avec `npm install --global corepack`, il n’est plus fourni avec Node.js depuis la v25). Versionner `package.json` et `yarn.lock`, mais jamais `node_modules/`, `.yarn/` ni `dist/`.
 - Conserver les 17 pages dans `src/`, les scripts dans `src/js/`, le SCSS dans `src/scss/`, et les fichiers copiés tels quels dans `src/public/`.
 - Vite découvre automatiquement les pages HTML directement placées dans `src/`. Toute évolution de cet inventaire doit être explicitement cadrée et répercutée dans `scripts/check-static.mjs` et la documentation.
 - Importer les dépendances JavaScript depuis `src/js/main.js` et les dépendances de styles depuis `src/scss/global.scss`. Ne pas ajouter de CDN pour les scripts, feuilles de style, fontes ou icônes.
